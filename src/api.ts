@@ -5,6 +5,10 @@ export type ApiResponse<T> = {
   Search: T[]
 }
 
+const fakeMovies = (name: string | null): Promise<Movie[]> => new Promise((res) => {
+  setTimeout(() => res([{ Title: name || 'xxx' }]), 4000)
+})
+
 const api = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
   timeout: 1000,
@@ -16,6 +20,7 @@ const api = axios.create({
 });
 
 export const getMovies = (name: string | null) => async () => {
-  const { data: { Search }} = await api.get<ApiResponse<Movie>>(`?s=${name || 'avengers'}&page=1&r=json`)
+  // const { data: { Search }} = await api.get<ApiResponse<Movie>>(`?s=${name || 'avengers'}&page=1&r=json`)
+  const Search = await fakeMovies(name);
   return Search;
 }
