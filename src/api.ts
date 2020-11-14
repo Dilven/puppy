@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { Movie } from './models/movie';
-
-export type ApiResponse<T> = {
-  Search: T[]
-}
+import { EpisodeBasic, EpisodePreview } from './models/episode';
+import { MovieBasic, MoviePreview } from './models/movie';
+import { SeriesBasic, SeriesPreview } from './models/series';
 
 type ResourceType = 'movie' | 'series' | 'episode';
 
@@ -15,10 +13,6 @@ type SearchParams = {
   id?: string | null;
 }
 
-const fakeMovies = (name: string | null): Promise<Movie[]> => new Promise((res) => {
-  setTimeout(() => res([{ Title: name || 'xxx' }]), 4000)
-})
-
 const apiRequest = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
   timeout: 1000,
@@ -29,28 +23,38 @@ const apiRequest = axios.create({
   }
 });
 
-
-
-export const get = (type: ResourceType, { name, year, plot, id, page }: SearchParams) => async () => {
+const getQueryParams = ({ name, year, plot, id, page }: SearchParams) => {
   const params = new URLSearchParams()
   params.set('r', 'json');
-  
-  if(type) params.set('type', type);
-  if(name) params.set('q', name);
+  if(name) params.set('s', name);
   if(year) params.set('y', `${year}`);
-  if(plot) params.set('plot', plot);
+  params.set('plot', plot || 'long');
   if(id) params.set('i', id);
   if(page) params.set('page', `${page}`);
 
-  const queryParams = params.toString();
+  return `${params.toString()}&`;
+}
 
-  const { data: { Search }} = await apiRequest.get<ApiResponse<Movie>>(`?${queryParams}`)
-  // const Search = await fakeMovies(name);
+export const get = <T extends MoviePreview | SeriesPreview | EpisodePreview>(type: ResourceType, params: SearchParams) => async () => {
+  const queryParams = getQueryParams(params)
+  const { data } = await apiRequest.get<T>(`?${queryParams}type=${type}`)
+  console.log('DEBUGGING: : get -> data', data);
+  if(data.Response === "False") throw new Error()
+  return data;
+}
+
+export const search = <T extends MovieBasic | SeriesBasic | EpisodeBasic>(type: ResourceType, params: SearchParams) => async () => {
+  const queryParams = getQueryParams(params)
+  const { data: { Search } } = await apiRequest.get<{ Search: T[] }>(`?${queryParams}type=${type}`)
   return Search;
 }
 
-export const getMovies = (params: SearchParams) => get('movie', params);
-export const getSeries = (params: SearchParams) => get('series', params);
-export const getEpisodes = (params: SearchParams) => get('episode', params);
+export const searchMovies = (params: SearchParams) => search<MoviePreview>('movie', params);
+export const searchSeries = (params: SearchParams) => search<SeriesPreview>('series', params);
+export const searchEpisodes = (params: SearchParams) => search<EpisodePreview>('episode', params);
 
-export type Query = typeof getMovies | typeof getSeries | typeof getEpisodes; 
+export const getSerie = (id: string) => get<SeriesPreview>('series', { id });
+export const getMovie = (id: string) => get<MoviePreview>('movie', { id });
+export const getEpisode = (id: string) => get<EpisodePreview>('episode', { id });
+
+export type SearchQuery = typeof searchMovies | typeof searchSeries | typeof searchEpisodes; 

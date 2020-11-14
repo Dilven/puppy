@@ -9,8 +9,12 @@ import { QueryCache, ReactQueryCacheProvider } from 'react-query'
 import { Home } from './screens/Home';
 import { Navigation } from './Navigation';
 import { paths } from './config/paths';
+import { Layout } from 'antd';
+
 
 import * as screens from './screens';
+import { NotificationProvider } from './providers/NotificationProvider';
+const { Header, Content, Footer } = Layout;
 
 const queryCache = new QueryCache({
   defaultConfig: {
@@ -21,37 +25,53 @@ const queryCache = new QueryCache({
 })
 
 const App = () => (
-  <ReactQueryCacheProvider queryCache={queryCache}>
-    <Router>
-      <div>
-        <Navigation />
-        <hr />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path={paths.searchEpisodes}>
-            <screens.SearchEpisodes />
-          </Route>
-          <Route path={paths.searchEpisodesResults}>
-            <screens.ResultsEpisodes />
-          </Route>
-          <Route exact path={paths.searchMovies}>
-            <screens.SearchMovies />
-          </Route>
-          <Route path={paths.searchMoviesResults}>
-            <screens.ResultsMovies />
-          </Route>
-          <Route exact path={paths.searchSeries}>
-            <screens.SearchSeries />
-          </Route>
-          <Route path={paths.searchSeriesResults}>
-            <screens.ResultsSeries />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  </ReactQueryCacheProvider>
+  <NotificationProvider>
+    <ReactQueryCacheProvider queryCache={queryCache}>
+      <Layout className="site-layout" style={{ marginLeft: 200 }}>
+        <Router>
+          <Navigation />
+          <Header className="site-layout-sub-header-background" style={{ padding: 0, height: 53 }} />
+          <Content style={{ margin: "24px 16px 0", overflow: "initial", height:"100vh" }}>
+          <div className="site-layout-background" style={{ padding: 24, textAlign: "center" }}>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path={paths.searchEpisodes}>
+                <screens.SearchEpisodes />
+              </Route>
+              <Route path={paths.searchEpisodesResults}>
+                <screens.ResultsEpisodes />
+              </Route>
+              <Route exact path={paths.searchMovies}>
+                <screens.SearchMovies />
+              </Route>
+              <Route path={paths.searchMoviesResults}>
+                <screens.ResultsMovies />
+              </Route>
+              <Route exact path={paths.searchSeries}>
+                <screens.SearchSeries />
+              </Route>
+              <Route path={paths.searchSeriesResults}>
+                <screens.ResultsSeries />
+              </Route>
+              <Route path={`${paths.series}/:id`}>
+                <screens.Serie />
+              </Route>
+              <Route path={`${paths.movie}/:id`}>
+                <screens.Movie />
+              </Route>
+              <Route path={`${paths.episode}/:id`}>
+                <screens.Episode />
+              </Route>
+            </Switch>
+          </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      </Router>
+    </Layout>
+    </ReactQueryCacheProvider>
+  </NotificationProvider>
 );
 
 

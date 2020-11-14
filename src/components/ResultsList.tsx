@@ -1,8 +1,10 @@
 import React from 'react';
-import { Movie } from '../models/movie';
+import { MovieBasic } from '../models/movie';
+import { CollectionCard } from './CollectionCard';
+import { Row, Col } from 'antd';
 
 type Props = { 
-  data?: Movie[],
+  data?: MovieBasic[],
   isLoading: boolean;
 }
 
@@ -11,8 +13,12 @@ export const ResultsList = ({ data, isLoading }: Props) => {
     return <span>Loading...</span>
   }
   return (
-    <div>
-      {data?.map(d => <h1>{d.Title}</h1>)}
-    </div>
+    <Row>
+      {data?.map(d =>
+        <Col span={8}>
+          <CollectionCard title={d.Title} poster={d.Poster} type={d.Type} id={d.imdbID} />  
+        </Col>
+      )}
+    </Row>
   )
 }

@@ -1,20 +1,21 @@
 import React, { useState } from "react"
 import { useQuery } from "react-query";
 import { useHistory } from "react-router-dom"
-import { Query } from "../api";
-import { MOVIES_QUERY_KEY, QueryKey } from "../constants/queriesKeys";
+import { SearchQuery } from "../api";
+import { QueryKey } from "../constants/queriesKeys";
 import { Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
 type Props = {
-  query: Query;
+  query: SearchQuery;
   queryKey: QueryKey;
+  redirectPath: string;
 }
 
-export const Form = ({ query }: Props) => {
+export const Form = ({ query, queryKey, redirectPath }: Props) => {
   const history = useHistory();
   const [name, setName] = useState('')
-    const { isLoading, refetch } = useQuery(MOVIES_QUERY_KEY, query({ name }),  {
+    const { isLoading, refetch } = useQuery(queryKey, query({ name }),  {
     refetchOnWindowFocus: false,
     enabled: false // turned off by default, manual refetch is needed
   })
@@ -22,7 +23,7 @@ export const Form = ({ query }: Props) => {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await refetch();
-    history.push(`/movies/search/results?q=${name}`);
+    history.push(`${redirectPath}?q=${name}`);
   }
   return (
     <form onSubmit={onSubmit}>
