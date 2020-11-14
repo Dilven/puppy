@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { paths } from './config/paths';
 
 export const Navigation = () => (
   <ul>
@@ -7,10 +8,13 @@ export const Navigation = () => (
       <Link to="/">Home</Link>
     </li>
     <li>
-      <Link to="/movies/search">Search movies</Link>
+      <Link to={paths.searchMovies}>Search movies</Link>
     </li>
     <li>
-      <Link to="/series/search">Search series</Link>
+      <Link to={paths.searchSeries}>Search series</Link>
+    </li>
+    <li>
+      <Link to={paths.searchEpisodes}>Search episodes</Link>
     </li>
   </ul>
 )

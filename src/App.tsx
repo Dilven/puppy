@@ -4,11 +4,13 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import 'antd/dist/antd.css'
 import { QueryCache, ReactQueryCacheProvider } from 'react-query'
 import { Home } from './screens/Home';
-import { Search } from './screens/Search';
-import { Results } from './screens/Results';
 import { Navigation } from './Navigation';
+import { paths } from './config/paths';
+
+import * as screens from './screens';
 
 const queryCache = new QueryCache({
   defaultConfig: {
@@ -28,17 +30,23 @@ const App = () => (
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/series/search">
-            <Search />
+          <Route exact path={paths.searchEpisodes}>
+            <screens.SearchEpisodes />
           </Route>
-          <Route path="/series/search/results">
-            <Results />
+          <Route path={paths.searchEpisodesResults}>
+            <screens.ResultsEpisodes />
           </Route>
-          <Route exact path="/movies/search">
-            <Search />
+          <Route exact path={paths.searchMovies}>
+            <screens.SearchMovies />
           </Route>
-          <Route path="/movies/search/results">
-            <Results />
+          <Route path={paths.searchMoviesResults}>
+            <screens.ResultsMovies />
+          </Route>
+          <Route exact path={paths.searchSeries}>
+            <screens.SearchSeries />
+          </Route>
+          <Route path={paths.searchSeriesResults}>
+            <screens.ResultsSeries />
           </Route>
         </Switch>
       </div>

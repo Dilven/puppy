@@ -1,13 +1,20 @@
 import React, { useState } from "react"
 import { useQuery } from "react-query";
 import { useHistory } from "react-router-dom"
-import { getMovies } from "../api";
-import { MOVIE_QUERY_KEY } from "../queries";
+import { Query } from "../api";
+import { MOVIES_QUERY_KEY, QueryKey } from "../constants/queriesKeys";
+import { Button } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
-export const Form = () => {
+type Props = {
+  query: Query;
+  queryKey: QueryKey;
+}
+
+export const Form = ({ query }: Props) => {
   const history = useHistory();
   const [name, setName] = useState('')
-  const { isLoading, refetch } = useQuery(MOVIE_QUERY_KEY, getMovies(name),  {
+    const { isLoading, refetch } = useQuery(MOVIES_QUERY_KEY, query({ name }),  {
     refetchOnWindowFocus: false,
     enabled: false // turned off by default, manual refetch is needed
   })
@@ -20,8 +27,9 @@ export const Form = () => {
   return (
     <form onSubmit={onSubmit}>
       <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-      <button type="submit">Search</button>
-      {isLoading && <span>Loading...</span>}
+      <Button type="primary" htmlType="submit" loading={isLoading} icon={<SearchOutlined />}>
+        Search
+      </Button>
     </form>
   )
 }
