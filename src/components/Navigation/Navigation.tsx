@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { paths } from './config/paths';
+import { paths } from '../../config/paths';
 import { Layout, Menu, Button, Badge } from 'antd';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusSquareOutlined } from '@ant-design/icons';
-import { OPEN_SAVED_ITEMS, useDispatchSaved, useSaved } from './providers/SavedProvider';
+import { OPEN_SAVED_ITEMS, useDispatchSaved, useSaved } from '../../providers/SavedProvider';
+import styles from './Navigation.module.css';
 
 const { Sider } = Layout;
 
@@ -14,12 +15,7 @@ export const Navigation = () => {
   return (
     <Layout>
       <Sider
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0
-        }}
+        className={styles.sider}
       >
       <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
@@ -36,13 +32,13 @@ export const Navigation = () => {
             <Link to={paths.searchEpisodes}>Search episodes</Link>
           </Menu.Item>
         </Menu>
-        <div style={{ position: 'absolute', bottom: 35 , left: 10 }}>
+        <div className={styles.savedButtonWrapper}>
           <Badge 
             count={Object.keys(saved.items).length} 
           >
             <Button 
               block
-              style={{ width: '170px'}}
+              className={styles.savedButton}
               type="dashed" 
               icon={<PlusSquareOutlined />}
               onClick={() => dispatch({ type: OPEN_SAVED_ITEMS })}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatchSaved, useSaved, OPEN_SAVED_ITEMS } from "../providers/SavedProvider";
 import { Drawer, Row, Col } from 'antd';
-import { ResultsItem } from "./ResultsItem";
+import { Item } from "./Item/Item";
 
 export const SavedItems = () => {
   const saved = useSaved();
@@ -19,7 +19,7 @@ export const SavedItems = () => {
     <Row>
       {Object.entries(saved.items).map(([,{ title, id, poster, type }]) => 
         <Col span={8}>
-          <ResultsItem title={title} id={id} type={type} poster={poster} size='small' />
+          <Item title={title} id={id} type={type} poster={poster} size='small' />
         </Col>
       )}
     </Row>

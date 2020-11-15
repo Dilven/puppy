@@ -1,6 +1,6 @@
 import React from 'react';
 import { searchEpisodes } from '../api';
-import { Form } from '../components/Form';
+import { Form } from '../components/Form/Form';
 import { paths } from '../config/paths';
 import { EPISODES_QUERY_KEY } from '../constants/queriesKeys';
 

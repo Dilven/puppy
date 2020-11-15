@@ -7,7 +7,7 @@ import {
 import 'antd/dist/antd.css'
 import { QueryCache, ReactQueryCacheProvider } from 'react-query'
 import { Home } from './screens/Home';
-import { Navigation } from './Navigation';
+import { Navigation } from './components/Navigation/Navigation';
 import { paths } from './config/paths';
 import { Layout } from 'antd';
 import { ReactQueryDevtools } from 'react-query-devtools'
@@ -15,6 +15,8 @@ import { ReactQueryDevtools } from 'react-query-devtools'
 import * as screens from './screens';
 import { SavedProvider } from './providers/SavedProvider';
 import { SavedItems } from './components/SavedItems';
+import styles from './App.module.css'
+
 const { Header, Content, Footer } = Layout;
 
 const queryCache = new QueryCache({
@@ -32,12 +34,12 @@ const App = () => (
     {/* <ReactQueryDevtools initialIsOpen /> */}
     <SavedProvider>
       <SavedItems />
-      <Layout className="site-layout" style={{ marginLeft: 200 }}>
+      <Layout className={`site-layout ${styles.layout}`} >
         <Router>
           <Navigation />
-          <Header className="site-layout-sub-header-background" style={{ padding: 0, height: 53 }} />
-          <Content style={{ margin: "24px 16px 0", overflow: "initial", height: "calc(100vh - 53px)" }}>
-          <div className="site-layout-background" style={{ padding: 24, textAlign: "center" }}>
+          <Header className={`site-layout-sub-header-background ${styles.header}`} />
+          <Content className={styles.content}>
+          <div className={`site-layout-background ${styles.contentWrapper}`}>
             <Switch>
               <Route exact path="/">
                 <Home />
@@ -72,7 +74,7 @@ const App = () => (
             </Switch>
           </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+          <Footer className={styles.footer}>Training</Footer>
       </Router>
     </Layout>
     </SavedProvider>
