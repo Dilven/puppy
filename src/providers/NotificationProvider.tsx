@@ -1,19 +1,30 @@
 import React, { useReducer, useContext, createContext } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
+export const ADD_NOTIFICATION = "ADD_NOTIFICATION";
+export const CLOSE_NOTIFICATION = "CLOSE_NOTIFICATION";
+export const CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS";
 
 type Notification = {
+  id: string;
   message: string;
 };
 
 type AddNotification = {
-  type: "ADD";
-  notification: Notification;
+  type: typeof ADD_NOTIFICATION;
+  notification: Omit<Notification, 'id'>;
 };
 
 type ClearNotification = {
-  type: "CLEAR";
+  type: typeof CLEAR_NOTIFICATIONS;
 };
 
-type NotificationActions = AddNotification | ClearNotification;
+type CloseNotification = {
+  type: typeof CLOSE_NOTIFICATION,
+  id: string;
+}
+
+type NotificationActions = AddNotification | ClearNotification | CloseNotification;
 
 const NotificationStateContext = createContext<Notification[]>([]);
 const NotificationDispatchContext = createContext<
@@ -21,10 +32,19 @@ const NotificationDispatchContext = createContext<
 >(null as any);
 
 const reducer = (state: Notification[], action: NotificationActions) => {
-  switch (action.type) {
-    case "ADD":
-      return [...state, action.notification];
-    case "CLEAR":
+  switch(action.type) {
+    case ADD_NOTIFICATION: {
+        return [
+          ...state,
+          {
+            id: uuidv4(),
+            ...action.notification,
+          },
+        ];
+      }
+    case CLOSE_NOTIFICATION:
+      return state.filter(notification => notification.id !== action.id);
+    case CLEAR_NOTIFICATIONS:
       return [];
     default:
       return state;

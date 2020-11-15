@@ -3,6 +3,7 @@ import { Card, Rate } from 'antd';
 import { FireOutlined, PlusSquareOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { HeartOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { ADD_NOTIFICATION, useDispatchNotification } from '../providers/NotificationProvider';
 
 const { Meta } = Card;
 
@@ -13,8 +14,13 @@ type Props = {
   type: string;
 }
 
-export const CollectionCard = ({ title, poster, id, type }: Props) => {
+export const ResultsItem = ({ title, poster, id, type }: Props) => {
   const history = useHistory();
+  const dispatch = useDispatchNotification();
+  const addItem = () => {
+    dispatch({ type: ADD_NOTIFICATION, notification: { message: `Added ${type} "${title}" to collections` } })
+  }
+
   return (
     <Card
       style={{ width: 300 }}
@@ -27,8 +33,8 @@ export const CollectionCard = ({ title, poster, id, type }: Props) => {
         />
       }
       actions={[
-        <FireOutlined />,
-        <PlusSquareOutlined />,
+        <HeartOutlined color="#eb2f96" />,
+        <PlusSquareOutlined onClick={addItem} />,
         <ShareAltOutlined />
       ]}
     >
@@ -36,7 +42,7 @@ export const CollectionCard = ({ title, poster, id, type }: Props) => {
         title={title}
         description={
           <div>
-            <Rate character={<HeartOutlined color="#eb2f96" />} allowHalf />
+            <Rate character={<FireOutlined />} allowHalf />
           </div>
         }
       />

@@ -14,6 +14,7 @@ import { Layout } from 'antd';
 
 import * as screens from './screens';
 import { NotificationProvider } from './providers/NotificationProvider';
+import { Notifications } from './components/Notifications';
 const { Header, Content, Footer } = Layout;
 
 const queryCache = new QueryCache({
@@ -26,12 +27,13 @@ const queryCache = new QueryCache({
 
 const App = () => (
   <NotificationProvider>
+    <Notifications />
     <ReactQueryCacheProvider queryCache={queryCache}>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
         <Router>
           <Navigation />
           <Header className="site-layout-sub-header-background" style={{ padding: 0, height: 53 }} />
-          <Content style={{ margin: "24px 16px 0", overflow: "initial", height:"100vh" }}>
+          <Content style={{ margin: "24px 16px 0", overflow: "initial", height: "calc(100vh - 53px)" }}>
           <div className="site-layout-background" style={{ padding: 24, textAlign: "center" }}>
             <Switch>
               <Route exact path="/">
