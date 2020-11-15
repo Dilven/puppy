@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, Rate } from 'antd';
-import { FireOutlined, PlusSquareOutlined, ShareAltOutlined } from '@ant-design/icons';
-import { HeartOutlined } from '@ant-design/icons';
+import { Card, Rate, Image } from 'antd';
+import { FireOutlined, PlusSquareOutlined, ShareAltOutlined, HeartOutlined, PlusSquareFilled } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import { ADD_NOTIFICATION, useDispatchNotification } from '../providers/NotificationProvider';
+import { ADD_ITEM, REMOVE_ITEM, useDispatchSaved, useSaved } from '../providers/SavedProvider';
+import { CardSize } from 'antd/lib/card';
 
 const { Meta } = Card;
 
@@ -12,20 +12,27 @@ type Props = {
   poster?: string;
   id: string;
   type: string;
+  size?: CardSize
 }
 
-export const ResultsItem = ({ title, poster, id, type }: Props) => {
+export const ResultsItem = ({ title, poster, id, type, size }: Props) => {
   const history = useHistory();
-  const dispatch = useDispatchNotification();
-  const addItem = () => {
-    dispatch({ type: ADD_NOTIFICATION, notification: { message: `Added ${type} "${title}" to collections` } })
+  const dispatch = useDispatchSaved();
+  const saved = useSaved();
+  const itemIsSaved = !!saved.items[id];
+
+  const setItem = () => {
+    console.log('DEBUGGING: : setItem -> itemIsSaved', itemIsSaved);
+    if(itemIsSaved) dispatch({ type: REMOVE_ITEM, id })
+    else dispatch({ type: ADD_ITEM, item: { title, id, poster, type } })
   }
 
   return (
     <Card
+      size={size}
       style={{ width: 300 }}
       cover={
-        <img
+        <Image
           onClick={() => history.push(`/${type}/${id}`)}
           alt="example"
           src={poster}
@@ -34,7 +41,7 @@ export const ResultsItem = ({ title, poster, id, type }: Props) => {
       }
       actions={[
         <HeartOutlined color="#eb2f96" />,
-        <PlusSquareOutlined onClick={addItem} />,
+        ...(itemIsSaved ? [<PlusSquareFilled onClick={setItem} />] : [<PlusSquareOutlined onClick={setItem} />]),
         <ShareAltOutlined />
       ]}
     >

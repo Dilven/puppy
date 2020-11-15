@@ -20,8 +20,6 @@ export const Form = ({ query, queryKey, redirectPath }: Props) => {
 
   const [mutate, { isLoading }] = useMutation(async (data: SearchParams) => query(data), {
     onSuccess: (data, variables) => {
-      console.log('DEBUGGING: : Form -> variables', variables);
-      console.log('DEBUGGING: : Form -> queryKey', queryKey);
       cache.setQueryData([queryKey, variables], data)
       history.push(`${redirectPath}?q=${name}&y=${year}`);
     }

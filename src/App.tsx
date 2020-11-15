@@ -13,8 +13,8 @@ import { Layout } from 'antd';
 import { ReactQueryDevtools } from 'react-query-devtools'
 
 import * as screens from './screens';
-import { NotificationProvider } from './providers/NotificationProvider';
-import { Notifications } from './components/Notifications';
+import { SavedProvider } from './providers/SavedProvider';
+import { SavedItems } from './components/SavedItems';
 const { Header, Content, Footer } = Layout;
 
 const queryCache = new QueryCache({
@@ -29,9 +29,9 @@ const queryCache = new QueryCache({
 const App = () => (
   
   <ReactQueryCacheProvider queryCache={queryCache}>
-    <ReactQueryDevtools initialIsOpen />
-    <NotificationProvider>
-      <Notifications />
+    {/* <ReactQueryDevtools initialIsOpen /> */}
+    <SavedProvider>
+      <SavedItems />
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
         <Router>
           <Navigation />
@@ -75,7 +75,7 @@ const App = () => (
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
       </Router>
     </Layout>
-    </NotificationProvider>
+    </SavedProvider>
   </ReactQueryCacheProvider>
 );
 

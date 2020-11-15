@@ -38,7 +38,6 @@ const getQueryParams = ({ name, year, plot, id, page }: SearchParams) => {
 export const get = async <T extends MoviePreview | SeriesPreview | EpisodePreview>(type: ResourceType, params: SearchParams) => {
   const queryParams = getQueryParams(params)
   const { data } = await apiRequest.get<T>(`?${queryParams}type=${type}`)
-  console.log('DEBUGGING: : get -> data', data);
   if(data.Response === "False") throw new Error()
   return data;
 }
