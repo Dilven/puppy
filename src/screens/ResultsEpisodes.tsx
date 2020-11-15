@@ -1,15 +1,14 @@
 import React from 'react';
-import { useQuery,  useQueryCache } from 'react-query'
-import { searchEpisodes } from '../api';
+import { useQuery } from 'react-query'
+import { searchEpisodes, SearchParams } from '../api';
 import { ResultsList } from '../components/ResultsList';
 import { ResultsPageHeader } from '../components/ResultsPageHeader';
 import { EPISODES_QUERY_KEY } from '../constants/queriesKeys';
 import { useSearchParams } from '../hooks/useSearchParams';
 
 export const ResultsEpisodes = () => {
-  useQueryCache();
   const searchParams = useSearchParams()
-  const { data, isLoading } = useQuery(EPISODES_QUERY_KEY, searchEpisodes(searchParams))
+  const { data, isLoading } = useQuery([EPISODES_QUERY_KEY, searchParams], async (_key, params: SearchParams) => await searchEpisodes(params))
 
   return (
     <>

@@ -10,7 +10,7 @@ import { Home } from './screens/Home';
 import { Navigation } from './Navigation';
 import { paths } from './config/paths';
 import { Layout } from 'antd';
-
+import { ReactQueryDevtools } from 'react-query-devtools'
 
 import * as screens from './screens';
 import { NotificationProvider } from './providers/NotificationProvider';
@@ -20,15 +20,18 @@ const { Header, Content, Footer } = Layout;
 const queryCache = new QueryCache({
   defaultConfig: {
     queries: {
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      staleTime: 1000
     }
   }
 })
 
 const App = () => (
-  <NotificationProvider>
-    <Notifications />
-    <ReactQueryCacheProvider queryCache={queryCache}>
+  
+  <ReactQueryCacheProvider queryCache={queryCache}>
+    <ReactQueryDevtools initialIsOpen />
+    <NotificationProvider>
+      <Notifications />
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
         <Router>
           <Navigation />
@@ -72,8 +75,8 @@ const App = () => (
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
       </Router>
     </Layout>
-    </ReactQueryCacheProvider>
-  </NotificationProvider>
+    </NotificationProvider>
+  </ReactQueryCacheProvider>
 );
 
 

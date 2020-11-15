@@ -7,10 +7,9 @@ import { Spin } from 'antd';
 
 export const Episode = () => {
   const { id } = useParams<{id: string}>();
-  const { data, isLoading, error } = useQuery(id, getEpisode(id), {
+  const { data, isLoading, error } = useQuery(id, getEpisode, {
     retry: false,
   })
-  
   if(isLoading) return <Spin size="large" />
   if(!data || error) return <ErrorPreview />
 

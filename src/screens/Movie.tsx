@@ -7,7 +7,7 @@ import { Spin } from 'antd';
 
 export const Movie = () => {
   const { id } = useParams<{id: string}>();
-  const { data, isLoading, error } = useQuery(id, getMovie(id), {
+  const { data, isLoading, error } = useQuery(id, getMovie, {
     retry: false,
   })
   

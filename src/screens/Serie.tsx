@@ -8,7 +8,7 @@ import { Spin } from 'antd';
 
 export const Serie = () => {
   const { id } = useParams<{id: string}>();
-  const { data, isLoading, error } = useQuery(id, getSerie(id), {
+  const { data, isLoading, error } = useQuery(id, getSerie, {
     retry: false,
   })
   

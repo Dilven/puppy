@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { useQuery } from "react-query";
+import { useMutation, useQueryCache } from "react-query";
 import { useHistory } from "react-router-dom"
-import { SearchQuery } from "../api";
+import { SearchParams, SearchQuery } from "../api";
 import { QueryKey } from "../constants/queriesKeys";
 import { Button, DatePicker } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
@@ -16,15 +16,20 @@ export const Form = ({ query, queryKey, redirectPath }: Props) => {
   const history = useHistory();
   const [name, setName] = useState('')
   const [year, setYear] = useState('')
-  const { isLoading, refetch } = useQuery(queryKey, query({ name, year }),  {
-    refetchOnWindowFocus: false,
-    enabled: false // turned off by default, manual refetch is needed
-  })
+  const cache = useQueryCache();
+
+  const [mutate, { isLoading }] = useMutation(async (data: SearchParams) => query(data), {
+    onSuccess: (data, variables) => {
+      console.log('DEBUGGING: : Form -> variables', variables);
+      console.log('DEBUGGING: : Form -> queryKey', queryKey);
+      cache.setQueryData([queryKey, variables], data)
+      history.push(`${redirectPath}?q=${name}&y=${year}`);
+    }
+  });
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await refetch();
-    history.push(`${redirectPath}?q=${name}&y=${year}`);
+    await mutate({ name, year });
   }
   return (
     <form onSubmit={onSubmit}>

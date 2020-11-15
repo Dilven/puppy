@@ -5,7 +5,7 @@ import { SeriesBasic, SeriesPreview } from './models/series';
 
 type ResourceType = 'movie' | 'series' | 'episode';
 
-type SearchParams = {
+export type SearchParams = {
   name?: string | null;
   year?: string | null;
   plot?: string | null;
@@ -35,7 +35,7 @@ const getQueryParams = ({ name, year, plot, id, page }: SearchParams) => {
   return `${params.toString()}&`;
 }
 
-export const get = <T extends MoviePreview | SeriesPreview | EpisodePreview>(type: ResourceType, params: SearchParams) => async () => {
+export const get = async <T extends MoviePreview | SeriesPreview | EpisodePreview>(type: ResourceType, params: SearchParams) => {
   const queryParams = getQueryParams(params)
   const { data } = await apiRequest.get<T>(`?${queryParams}type=${type}`)
   console.log('DEBUGGING: : get -> data', data);
@@ -43,7 +43,7 @@ export const get = <T extends MoviePreview | SeriesPreview | EpisodePreview>(typ
   return data;
 }
 
-export const search = <T extends MovieBasic | SeriesBasic | EpisodeBasic>(type: ResourceType, params: SearchParams) => async () => {
+export const search = async <T extends MovieBasic | SeriesBasic | EpisodeBasic>(type: ResourceType, params: SearchParams) => {
   const queryParams = getQueryParams(params)
   const { data: { Search } } = await apiRequest.get<{ Search: T[] }>(`?${queryParams}type=${type}`)
   return Search;
