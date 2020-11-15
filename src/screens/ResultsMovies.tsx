@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query'
 import { searchMovies, SearchParams } from '../api';
-import { ResultsList } from '../components/ResultsList';
+import { Results } from '../components/Form/Results/Results';
 import { ResultsPageHeader } from '../components/ResultsPageHeader';
 import { MOVIES_QUERY_KEY } from '../constants/queriesKeys';
 import { useSearchParams } from '../hooks/useSearchParams';
@@ -13,7 +13,7 @@ export const ResultsMovies = () => {
   return (
     <>
       <ResultsPageHeader title="Movies results" />
-      <ResultsList data={data} isLoading={isLoading} />
+      <Results data={data} isLoading={isLoading} />
     </>
   )
 }

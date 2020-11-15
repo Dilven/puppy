@@ -28,7 +28,6 @@ export const Form = ({ query, queryKey, redirectPath }: Props) => {
   });
 
   const onSubmit = async (data: any) => {
-    console.log('DEBUGGING: : Form -> data', data);
     await mutate({ name: data.name, year: `${data.year?.year() || ''}` });
   }
 

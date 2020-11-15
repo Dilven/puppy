@@ -6,7 +6,6 @@ import { Item } from "./Item/Item";
 export const SavedItems = () => {
   const saved = useSaved();
   const dispatch = useDispatchSaved();
-  console.log('DEBUGGING: : SavedItems -> saved', saved.items);
 
   return (
     <Drawer

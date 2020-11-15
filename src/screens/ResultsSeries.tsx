@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query'
 import { SearchParams, searchSeries } from '../api';
-import { ResultsList } from '../components/ResultsList';
+import { Results } from '../components/Form/Results/Results';
 import { ResultsPageHeader } from '../components/ResultsPageHeader';
 import { SERIES_QUERY_KEY } from '../constants/queriesKeys';
 import { useSearchParams } from '../hooks/useSearchParams';
@@ -14,7 +14,7 @@ export const ResultsSeries = () => {
   return (
     <div>
       <ResultsPageHeader title="Series results" />
-      <ResultsList data={data} isLoading={isLoading} />
+      <Results data={data} isLoading={isLoading} />
     </div>
   )
 }
