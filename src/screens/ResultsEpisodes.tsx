@@ -1,10 +1,11 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { searchEpisodes, SearchParams } from '../api';
+import { searchEpisodes } from '../api';
 import { Results } from '../components/Form/Results/Results';
 import { ResultsPageHeader } from '../components/ResultsPageHeader';
-import { EPISODES_QUERY_KEY } from '../constants/queriesKeys';
+import { EPISODES_QUERY_KEY } from '../constants/queries-keys';
 import { useSearchParams } from '../hooks/useSearchParams';
+import { SearchParams } from '../models/search-params';
 
 export const ResultsEpisodes = () => {
   const searchParams = useSearchParams()

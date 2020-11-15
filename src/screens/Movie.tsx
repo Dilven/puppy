@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getMovie } from '../api';
 import { ErrorPreview } from '../components/ErrorPreview';
 import { Spin } from 'antd';
+import { MoviePreview } from '../components/MoviePreview';
 
 export const Movie = () => {
   const { id } = useParams<{id: string}>();
@@ -15,6 +16,6 @@ export const Movie = () => {
   if(!data || error) return <ErrorPreview />
 
   return (
-    <div>eee</div>
+    <MoviePreview {...data}/>
   )
 }

@@ -1,5 +1,6 @@
 .layout {
   margin-left: 200px;
+  height: 100%;
 }
 
 .header {
@@ -10,7 +11,7 @@
 .content {
   margin: 24px 16px 0;
   overflow: initial;
-  height: calc(100vh - 53px);
+  height: 100%;
 }
 
 .contentWrapper {

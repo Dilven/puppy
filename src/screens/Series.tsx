@@ -6,7 +6,7 @@ import { ErrorPreview } from '../components/ErrorPreview';
 import { SeriePreview } from '../components/SeriePreview';
 import { Spin } from 'antd';
 
-export const Serie = () => {
+export const Series = () => {
   const { id } = useParams<{id: string}>();
   const { data, isLoading, error } = useQuery(id, getSerie, {
     retry: false,

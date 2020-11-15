@@ -2,7 +2,7 @@ import React from 'react';
 import { searchSeries } from '../api';
 import { Form } from '../components/Form/Form';
 import { paths } from '../config/paths';
-import { SERIES_QUERY_KEY } from '../constants/queriesKeys';
+import { SERIES_QUERY_KEY } from '../constants/queries-keys';
 
 export const SearchSeries = () => (
   <div>

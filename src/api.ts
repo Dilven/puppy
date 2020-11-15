@@ -1,17 +1,11 @@
 import axios from 'axios';
+import { getQueryParams } from './helpers/search-params';
 import { EpisodeBasic, EpisodePreview } from './models/episode';
 import { MovieBasic, MoviePreview } from './models/movie';
+import { SearchParams } from './models/search-params';
 import { SeriesBasic, SeriesPreview } from './models/series';
 
 type ResourceType = 'movie' | 'series' | 'episode';
-
-export type SearchParams = {
-  name?: string | null;
-  year?: string | null;
-  plot?: string | null;
-  page?: string | null;
-  id?: string | null;
-}
 
 const apiRequest = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
@@ -23,28 +17,16 @@ const apiRequest = axios.create({
   }
 });
 
-const getQueryParams = ({ name, year, plot, id, page }: SearchParams) => {
-  const params = new URLSearchParams()
-  params.set('r', 'json');
-  if(name) params.set('s', name);
-  if(year) params.set('y', `${year}`);
-  params.set('plot', plot || 'long');
-  if(id) params.set('i', id);
-  if(page) params.set('page', `${page}`);
-
-  return `${params.toString()}&`;
-}
-
 export const get = async <T extends MoviePreview | SeriesPreview | EpisodePreview>(type: ResourceType, params: SearchParams) => {
   const queryParams = getQueryParams(params)
-  const { data } = await apiRequest.get<T>(`?${queryParams}type=${type}`)
+  const { data } = await apiRequest.get<T>(`?${queryParams}&type=${type}&r=json`)
   if(data.Response === "False") throw new Error()
   return data;
 }
 
 export const search = async <T extends MovieBasic | SeriesBasic | EpisodeBasic>(type: ResourceType, params: SearchParams) => {
   const queryParams = getQueryParams(params)
-  const { data: { Search } } = await apiRequest.get<{ Search: T[] }>(`?${queryParams}type=${type}`)
+  const { data: { Search } } = await apiRequest.get<{ Search: T[] }>(`?${queryParams}&type=${type}&r=json`)
   return Search;
 }
 
