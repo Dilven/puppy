@@ -8,7 +8,7 @@ import { Error } from '../Error';
 import styles from './Results.module.css';
 
 type Props = { 
-  data?: Movie[] | Series[] | Episode[],
+  data?: Array<Episode|Series|Movie>,
   isLoading: boolean;
   isError: boolean;
 }
@@ -22,7 +22,7 @@ export const Results = ({ data, isLoading, isError }: Props) => {
     <Row className={styles.row}>
       {data?.map(d =>
         <Col span={8}>
-          <Item title={d.Title} poster={d.Poster} type={d.Type} id={d.imdbID} />  
+          <Item key={d.imdbID} title={d.Title} poster={d.Poster} type={d.Type} id={d.imdbID} />  
         </Col>
       )}
     </Row>

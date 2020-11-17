@@ -8,7 +8,7 @@ export const ItemSchema = z.object({
   imdbID: z.string(),
 })
 
-export const ItemPreviewSchema = ItemSchema.extend(({
+export const ItemPreviewSchema = ItemSchema.extend({
   Actors: z.string(),
   Awards: z.string(),
   Country: z.string(),
@@ -28,4 +28,4 @@ export const ItemPreviewSchema = ItemSchema.extend(({
   Writer: z.string(),
   imdbRating:  z.string(),
   imdbVotes: z.string(),
-}))
+})
