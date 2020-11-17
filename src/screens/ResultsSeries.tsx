@@ -10,12 +10,12 @@ import { SearchParams } from '../models/search-params';
 export const ResultsSeries = () => {
   const searchParams = useSearchParams()
 
-  const { data, isLoading } = useQuery([SERIES_QUERY_KEY, searchParams], async (_key, params: SearchParams) => await searchSeries(params))
+  const { data, isLoading, error } = useQuery([SERIES_QUERY_KEY, searchParams], async (_key, params: SearchParams) => await searchSeries(params))
   
   return (
     <>
       <ResultsPageHeader title="Series results" />
-      <Results data={data} isLoading={isLoading} />
+      <Results data={data} isLoading={isLoading} isError={!!error} />
     </>
   )
 }

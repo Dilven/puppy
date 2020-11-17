@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { getMovie } from '../helpers/api';
-import { ErrorPreview } from '../components/ErrorPreview';
+import { Error } from '../components/Error';
 import { Spin } from 'antd';
 import { MoviePreview } from '../components/MoviePreview';
 
@@ -13,7 +13,7 @@ export const Movie = () => {
   })
   
   if(isLoading) return <Spin size="large" />
-  if(!data || error) return <ErrorPreview />
+  if(!data || error) return <Error />
 
   return (
     <MoviePreview {...data}/>

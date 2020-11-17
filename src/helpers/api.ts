@@ -1,10 +1,9 @@
+import * as z from 'zod';
 import axios from 'axios';
 import { getQueryParams } from './search-params';
-import { Episode, EpisodePreview } from '../models/episode';
 import { Item } from '../models/item';
-import { Movie, MoviePreview } from '../models/movie';
 import { SearchParams } from '../models/search-params';
-import { Series, SeriesPreview } from '../models/series';
+import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from './validation';
 
 type ResourceType = Item['Type'];
 
@@ -18,25 +17,25 @@ const apiRequest = axios.create({
   }
 });
 
-export const get = async <T extends MoviePreview | SeriesPreview | EpisodePreview>(type: ResourceType, params: SearchParams) => {
+export const get = async <T extends ResourceType>(type: T, params: SearchParams): Promise<z.infer<PreviewSchemasType[T]>> => {
   const queryParams = getQueryParams(params)
-  const { data } = await apiRequest.get<T>(`?${queryParams}&type=${type}&r=json`)
-  if(data.Response === "False") throw new Error()
-  return data;
+  const { data } = await apiRequest.get<unknown>(`?${queryParams}&type=${type}&r=json`)
+  return validatePreview(type, data);
 }
 
-export const search = async <T extends Movie | Series | Episode>(type: ResourceType, params: SearchParams) => {
+export const search = async <T extends ResourceType>(type: T, params: SearchParams): Promise<z.infer<SearchSchemasType[T]>> => {
   const queryParams = getQueryParams(params)
-  const { data: { Search } } = await apiRequest.get<{ Search: T[] }>(`?${queryParams}&type=${type}&r=json`)
-  return Search;
+  const { data } = await apiRequest.get<unknown>(`?${queryParams}&type=${type}&r=json`)
+  const results = z.object({ Search: z.array(z.unknown())}).parse(data).Search
+  return validateSearch(type, results)
 }
 
-export const searchMovies = (params: SearchParams) => search<Movie>('movie', params);
-export const searchSeries = (params: SearchParams) => search<Series>('series', params);
-export const searchEpisodes = (params: SearchParams) => search<Episode>('episode', params);
+export const searchMovies = (params: SearchParams) => search('movie', params);
+export const searchSeries = (params: SearchParams) => search('series', params);
+export const searchEpisodes = (params: SearchParams) => search('episode', params);
 
-export const getSerie = (id: string) => get<SeriesPreview>('series', { id });
-export const getMovie = (id: string) => get<MoviePreview>('movie', { id });
-export const getEpisode = (id: string) => get<EpisodePreview>('episode', { id });
+export const getSerie = (id: string) => get('series', { id });
+export const getMovie = (id: string) => get('movie', { id });
+export const getEpisode = (id: string) => get('episode', { id });
 
 export type SearchQuery = typeof searchMovies | typeof searchSeries | typeof searchEpisodes; 

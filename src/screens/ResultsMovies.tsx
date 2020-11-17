@@ -9,12 +9,12 @@ import { SearchParams } from '../models/search-params';
 
 export const ResultsMovies = () => {
   const searchParams = useSearchParams()
-  const { data, isLoading } = useQuery([MOVIES_QUERY_KEY, searchParams], async (_key, params: SearchParams) => await searchMovies(params))
+  const { data, isLoading, error } = useQuery([MOVIES_QUERY_KEY, searchParams], async (_key, params: SearchParams) => await searchMovies(params))
 
   return (
     <>
       <ResultsPageHeader title="Movies results" />
-      <Results data={data} isLoading={isLoading} />
+      <Results data={data} isLoading={isLoading} isError={!!error} />
     </>
   )
 }

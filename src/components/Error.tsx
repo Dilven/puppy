@@ -1,7 +1,7 @@
 import React from "react"
 import { Result, Button } from 'antd';
 
-export const ErrorPreview = () => {
+export const Error = () => {
   return (
     <Result
       status="500"
