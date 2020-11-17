@@ -1,11 +1,13 @@
 import React from 'react';
-import { MovieBasic } from '../../../models/movie';
-import { Item } from '../../Item/Item';
+import { Movie } from '../../models/movie';
+import { Episode } from '../../models/episode';
+import { Series } from '../../models/series';
+import { Item } from '../Item/Item';
 import { Row, Col } from 'antd';
 import styles from './Results.module.css';
 
 type Props = { 
-  data?: MovieBasic[],
+  data?: Movie[] | Series[] | Episode[],
   isLoading: boolean;
 }
 

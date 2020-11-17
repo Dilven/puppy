@@ -10,7 +10,7 @@ import { Home } from './screens/Home';
 import { Navigation } from './components/Navigation/Navigation';
 import { paths } from './config/paths';
 import { Layout } from 'antd';
-// import { ReactQueryDevtools } from 'react-query-devtools'
+import { ReactQueryDevtools } from 'react-query-devtools'
 
 import * as screens from './screens';
 import { SavedProvider } from './providers/SavedProvider';
@@ -29,9 +29,8 @@ const queryCache = new QueryCache({
 })
 
 const App = () => (
-  
   <ReactQueryCacheProvider queryCache={queryCache}>
-    {/* <ReactQueryDevtools initialIsOpen /> */}
+    <ReactQueryDevtools initialIsOpen />
     <SavedProvider>
       <SavedItems />
       <Layout className={`site-layout ${styles.layout}`} >

@@ -1,9 +1,4 @@
-import { CollectionBasic, CollectionPreview } from "./collection"
+import * as z from 'zod';
 
-export type SeriesBasic = CollectionBasic & {
-
-}
-
-export type SeriesPreview = CollectionPreview & {
-  totalSeasons: string;
-}
+export type Series = z.infer<typeof SeriesSchema>; 
+export type SeriesPreview = z.infer<typeof SeriesPreviewSchema>; 

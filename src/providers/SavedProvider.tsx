@@ -1,4 +1,5 @@
 import React, { useReducer, useContext, createContext } from "react";
+import { ResourceType } from "../models/item";
 
 export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
@@ -9,7 +10,7 @@ type SavedItem = {
   id: string;
   title: string;
   poster?: string;
-  type: string;
+  type: ResourceType;
 };
 
 type State = {

@@ -1,9 +1,5 @@
-import { CollectionBasic, CollectionPreview } from "./collection"
+import * as z from 'zod';
+import { EpisodeSchema, EpisodePreviewSchema } from '../schemas/episode';
 
-export type EpisodeBasic = CollectionBasic & {
-
-}
-
-export type EpisodePreview = CollectionPreview & {
-
-}
+export type Episode = z.infer<typeof EpisodeSchema>; 
+export type EpisodePreview = z.infer<typeof EpisodePreviewSchema>; 

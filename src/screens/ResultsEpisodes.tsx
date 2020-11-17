@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { searchEpisodes } from '../api';
-import { Results } from '../components/Form/Results/Results';
+import { searchEpisodes } from '../helpers/api';
+import { Results } from '../components/Results/Results';
 import { ResultsPageHeader } from '../components/ResultsPageHeader';
 import { EPISODES_QUERY_KEY } from '../constants/queries-keys';
 import { useSearchParams } from '../hooks/useSearchParams';

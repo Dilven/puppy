@@ -1,5 +1,6 @@
 # Libraries & Tools
 
+- zod
 - context
 - hooks
 - react-query

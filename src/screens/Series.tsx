@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { getSerie } from '../api';
+import { getSerie } from '../helpers/api';
 import { ErrorPreview } from '../components/ErrorPreview';
 import { SeriePreview } from '../components/SeriePreview';
 import { Spin } from 'antd';

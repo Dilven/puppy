@@ -1,7 +1,7 @@
 import React from "react"
 import { useMutation, useQueryCache } from "react-query";
 import { useHistory } from "react-router-dom"
-import { SearchQuery } from "../../api";
+import { SearchQuery } from "../../helpers/api";
 import { QueryKey } from "../../constants/queries-keys";
 import { Button, DatePicker, Input, Form as AntdForm } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';

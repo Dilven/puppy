@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { getMovie } from '../api';
+import { getMovie } from '../helpers/api';
 import { ErrorPreview } from '../components/ErrorPreview';
 import { Spin } from 'antd';
 import { MoviePreview } from '../components/MoviePreview';

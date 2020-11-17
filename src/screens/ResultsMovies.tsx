@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { searchMovies } from '../api';
-import { Results } from '../components/Form/Results/Results';
+import { searchMovies } from '../helpers/api';
+import { Results } from '../components/Results/Results';
 import { ResultsPageHeader } from '../components/ResultsPageHeader';
 import { MOVIES_QUERY_KEY } from '../constants/queries-keys';
 import { useSearchParams } from '../hooks/useSearchParams';
