@@ -10,10 +10,16 @@ import styles from './Form.module.css';
 import { SearchParams } from "../../models/search-params";
 import { getQueryParams } from "../../helpers/search-params";
 import { rejectEmpty } from "../../helpers/reject-empty";
+
 type Props = {
   query: SearchQuery;
   queryKey: QueryKey;
   redirectPath: string;
+}
+
+type FormData = {
+  year?: { year: () => string };
+  name?: string;
 }
 
 export const Form = ({ query, queryKey, redirectPath }: Props) => {
@@ -29,7 +35,7 @@ export const Form = ({ query, queryKey, redirectPath }: Props) => {
     }
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FormData) => {
     const year = data.year?.year();
     const params: SearchParams = { ...data, year: year ? `${year}` : null }
     await mutate(rejectEmpty(params));

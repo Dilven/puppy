@@ -43,7 +43,7 @@ const initState = { isOpen: false, items: {} };
 const SavedStateContext = createContext<State>(initState);
 const SavedDispatchContext = createContext<
   React.Dispatch<SavedActions>
->(null as any);
+>(() => {});
 
 const reducer = (state: State, action: SavedActions) => {
   switch(action.type) {
@@ -74,7 +74,11 @@ const reducer = (state: State, action: SavedActions) => {
   }
 };
 
-export const SavedProvider = ({ children }: any) => {
+type Props = {
+  children: React.ReactNode;
+}
+
+export const SavedProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(reducer, initState);
 
   return (
