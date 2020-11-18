@@ -18,12 +18,14 @@ import { SavedItems } from './components/SavedItems';
 import styles from './App.module.css'
 
 const { Header, Content, Footer } = Layout;
+const THIRTY_MINUTES = 1000 * 60 * 30;
 
 const queryCache = new QueryCache({
   defaultConfig: {
     queries: {
       refetchOnWindowFocus: false,
-      staleTime: 1000
+      refetchOnMount: false,
+      staleTime: THIRTY_MINUTES,
     }
   }
 })
