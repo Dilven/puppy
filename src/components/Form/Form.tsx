@@ -1,15 +1,11 @@
 import React from "react"
-import { useMutation, useQueryCache } from "react-query";
-import { useHistory } from "react-router-dom"
 import { SearchQuery } from "../../helpers/api";
 import { QueryKey } from "../../constants/queries-keys";
 import { Button, DatePicker, Input, Form as AntdForm } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { useForm, Controller } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import styles from './Form.module.css';
-import { SearchParams } from "../../models/search-params";
-import { getQueryParams } from "../../helpers/search-params";
-import { rejectEmpty } from "../../helpers/reject-empty";
+import { useSearchForm } from "../../hooks/useSearchForm";
 
 type Props = {
   query: SearchQuery;
@@ -17,32 +13,11 @@ type Props = {
   redirectPath: string;
 }
 
-type FormData = {
-  year?: { year: () => string };
-  name?: string;
-}
-
 export const Form = ({ query, queryKey, redirectPath }: Props) => {
-  const history = useHistory();
-  const cache = useQueryCache();
-  const { handleSubmit, control } = useForm();
-
-  const [mutate, { isLoading }] = useMutation(async (data: SearchParams) => query(data), {
-    onSuccess: (data, variables) => {
-      cache.setQueryData([queryKey, {...variables, page: '1' }], data)
-      const searchParams = getQueryParams({...variables, page: '1' });
-      history.push(`${redirectPath}?${searchParams}`);
-    }
-  });
-
-  const onSubmit = async (data: FormData) => {
-    const year = data.year?.year();
-    const params: SearchParams = { ...data, year: year ? `${year}` : null }
-    await mutate(rejectEmpty(params));
-  }
-
+  const { onSubmit, control, isLoading } = useSearchForm(queryKey, query, redirectPath);
+  
   return (
-    <AntdForm onFinish={handleSubmit(onSubmit)} layout="inline" className={styles.form}>
+    <AntdForm onFinish={onSubmit} layout="inline" className={styles.form}>
       <Controller
         as={<Input type='text' placeholder="Title" />}
         name='name'
