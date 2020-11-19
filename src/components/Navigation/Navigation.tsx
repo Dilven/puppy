@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { paths } from '../../config/paths';
 import { Layout, Menu, Button, Badge } from 'antd';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusSquareOutlined } from '@ant-design/icons';
@@ -11,6 +11,7 @@ const { Sider } = Layout;
 export const Navigation = () => {
   const dispatch = useDispatchSaved();
   const saved = useSaved();
+  const { pathname } = useLocation();
 
   return (
     <Layout>
@@ -18,18 +19,18 @@ export const Navigation = () => {
         className={styles.sider}
       >
       <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            <Link to="/">Home</Link>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
+          <Menu.Item key={paths.home} icon={<UserOutlined />}>
+            <NavLink to={paths.home}>Home</NavLink>
           </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-          <Link to={paths.searchMovies}>Search movies</Link>
+          <Menu.Item key={paths.searchMovies} icon={<VideoCameraOutlined />}>
+            <NavLink to={paths.searchMovies}>Search movies</NavLink>
           </Menu.Item>
-          <Menu.Item key="3" icon={<UploadOutlined />}>
-            <Link to={paths.searchSeries}>Search series</Link>
+          <Menu.Item key={paths.searchSeries} icon={<UploadOutlined />}>
+            <NavLink to={paths.searchSeries}>Search series</NavLink>
           </Menu.Item>
-          <Menu.Item key="4" icon={<UserOutlined />}>
-            <Link to={paths.searchEpisodes}>Search episodes</Link>
+          <Menu.Item key={paths.searchEpisodes} icon={<UserOutlined />}>
+            <NavLink to={paths.searchEpisodes}>Search episodes</NavLink>
           </Menu.Item>
         </Menu>
         <div className={styles.savedButtonWrapper}>

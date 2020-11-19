@@ -42,7 +42,7 @@ const App = () => (
           <Content className={styles.content}>
           <div className={`site-layout-background ${styles.contentWrapper}`}>
             <Switch>
-              <Route exact path="/">
+              <Route exact path={paths.home}>
                 <Home />
               </Route>
               <Route exact path={paths.searchEpisodes}>
