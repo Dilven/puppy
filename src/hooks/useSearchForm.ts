@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useQueryCache, useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 import { QueryKey } from "../constants/queries-keys";
+import { DEFAULT_PAGE } from "../constants/search-params";
 import { SearchQuery } from "../helpers/api";
 import { rejectEmpty } from "../helpers/reject-empty";
 import { getQueryParams } from "../helpers/search-params";
@@ -17,11 +18,12 @@ export const useSearchForm = (queryKey: QueryKey, query: SearchQuery, redirectPa
   const cache = useQueryCache();
   const { handleSubmit, control } = useForm();
 
-  const [mutate, { isLoading }] = useMutation(async (data: SearchParams) => query(data), {
+  const [mutate, { isLoading }] = useMutation(query, {
     onSuccess: (data, variables) => {
-      cache.setQueryData([queryKey, {...variables, page: '1' }], data)
-      const searchParams = getQueryParams({...variables, page: '1' });
-      history.push(`${redirectPath}?${searchParams}`);
+      const searchParams = {...variables, page: DEFAULT_PAGE }
+      cache.setQueryData([queryKey, searchParams], data)
+      const searchParamsUrl = getQueryParams(searchParams);
+      history.push(`${redirectPath}?${searchParamsUrl}`);
     }
   });
 
