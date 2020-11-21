@@ -5,7 +5,6 @@ import { QueryCache, ReactQueryCacheProvider } from 'react-query'
 import { Navigation } from './components/Navigation/Navigation';
 import { Layout } from 'antd';
 import { ReactQueryDevtools } from 'react-query-devtools'
-
 import { SavedProvider } from './providers/SavedProvider';
 import { NotificationProvider } from './providers/NotificationProvider';
 import { SavedItems } from './components/SavedItems';
@@ -39,6 +38,5 @@ const App = () => (
     </NotificationProvider>
   </ReactQueryCacheProvider>
 );
-
 
 export default App;

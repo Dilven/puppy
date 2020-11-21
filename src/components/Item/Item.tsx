@@ -27,15 +27,22 @@ export const Item = ({ title, poster, id, type, size }: Props) => {
   const itemIsSaved = !!saved.items[id];
   const prefetchItem = usePrefetchItem(id, type);
 
-  const setItem = () => {
-    if(itemIsSaved) dispatchSaved({ type: REMOVE_ITEM, id })
+  const onSaveClick = () => {
+    if(itemIsSaved) {
+      dispatchSaved({ type: REMOVE_ITEM, id })
+      dispatchNotification.success({
+        message: title,
+        description: <p>Removed from the list of saved items</p>,
+        placement: 'bottomRight',
+      });
+    }
     else {
       prefetchItem();
       dispatchSaved({ type: ADD_ITEM, item: { title, id, poster, type } })
-      dispatchNotification.info({
-        message: `Notification`,
-        description: <p>Hello, !</p>,
-        placement: 'topLeft',
+      dispatchNotification.success({
+        message: title,
+        description: <p>Added to the list of saved items</p>,
+        placement: 'bottomRight',
       });
     }
   }
@@ -54,7 +61,7 @@ export const Item = ({ title, poster, id, type, size }: Props) => {
       }
       actions={[
         <HeartOutlined color="#eb2f96" />,
-        ...(itemIsSaved ? [<MinusSquareFilled onClick={setItem} />] : [<PlusSquareOutlined onClick={setItem} />]),
+        ...(itemIsSaved ? [<MinusSquareFilled onClick={onSaveClick} />] : [<PlusSquareOutlined onClick={onSaveClick} />]),
         <ShareAltOutlined />
       ]}
     >

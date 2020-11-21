@@ -5,6 +5,7 @@ import { Layout, Menu, Button, Badge } from 'antd';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import { OPEN_SAVED_ITEMS, useDispatchSaved, useSaved } from '../../providers/SavedProvider';
 import styles from './Navigation.module.css';
+import { useNotification } from '../../providers/NotificationProvider';
 
 const { Sider } = Layout;
 
@@ -12,9 +13,11 @@ export const Navigation = () => {
   const dispatch = useDispatchSaved();
   const saved = useSaved();
   const { pathname } = useLocation();
+  const contextHolder = useNotification();
 
   return (
     <Layout>
+      {contextHolder}
       <Sider
         className={styles.sider}
       >
