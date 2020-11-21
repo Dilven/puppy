@@ -11,19 +11,11 @@ import { NotificationProvider } from './providers/NotificationProvider';
 import { SavedItems } from './components/SavedItems';
 import styles from './App.module.css'
 import { Routes } from './Routes';
+import { cacheConfig } from './config/cache';
 
 const { Header, Content, Footer } = Layout;
-const THIRTY_MINUTES = 1000 * 60 * 30;
 
-const queryCache = new QueryCache({
-  defaultConfig: {
-    queries: {
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      staleTime: THIRTY_MINUTES,
-    }
-  }
-})
+const queryCache = new QueryCache(cacheConfig)
 
 const App = () => (
   <ReactQueryCacheProvider queryCache={queryCache}>
