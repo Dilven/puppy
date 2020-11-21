@@ -7,6 +7,7 @@ import { CardSize } from 'antd/lib/card';
 import styles from './Item.module.css';
 import { usePrefetchItem } from '../../hooks/usePrefetchQuery';
 import { ResourceType } from '../../models/item';
+import { useDispatchNotification } from '../../providers/NotificationProvider';
 
 const { Meta } = Card;
 
@@ -19,17 +20,23 @@ type Props = {
 }
 
 export const Item = ({ title, poster, id, type, size }: Props) => {
+  const dispatchNotification = useDispatchNotification();
   const history = useHistory();
-  const dispatch = useDispatchSaved();
+  const dispatchSaved = useDispatchSaved();
   const saved = useSaved();
   const itemIsSaved = !!saved.items[id];
   const prefetchItem = usePrefetchItem(id, type);
 
   const setItem = () => {
-    if(itemIsSaved) dispatch({ type: REMOVE_ITEM, id })
+    if(itemIsSaved) dispatchSaved({ type: REMOVE_ITEM, id })
     else {
       prefetchItem();
-      dispatch({ type: ADD_ITEM, item: { title, id, poster, type } })
+      dispatchSaved({ type: ADD_ITEM, item: { title, id, poster, type } })
+      dispatchNotification.info({
+        message: `Notification`,
+        description: <p>Hello, !</p>,
+        placement: 'topLeft',
+      });
     }
   }
 

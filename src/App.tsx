@@ -14,6 +14,7 @@ import { ReactQueryDevtools } from 'react-query-devtools'
 
 import * as screens from './screens';
 import { SavedProvider } from './providers/SavedProvider';
+import { NotificationProvider } from './providers/NotificationProvider';
 import { SavedItems } from './components/SavedItems';
 import styles from './App.module.css'
 
@@ -33,52 +34,54 @@ const queryCache = new QueryCache({
 const App = () => (
   <ReactQueryCacheProvider queryCache={queryCache}>
     <ReactQueryDevtools initialIsOpen />
-    <SavedProvider>
-      <SavedItems />
-      <Layout className={`site-layout ${styles.layout}`} >
-        <Router>
-          <Navigation />
-          <Header className={`site-layout-sub-header-background ${styles.header}`} />
-          <Content className={styles.content}>
-          <div className={`site-layout-background ${styles.contentWrapper}`}>
-            <Switch>
-              <Route exact path={paths.home}>
-                <Home />
-              </Route>
-              <Route exact path={paths.searchEpisodes}>
-                <screens.SearchEpisodes />
-              </Route>
-              <Route path={paths.searchEpisodesResults}>
-                <screens.ResultsEpisodes />
-              </Route>
-              <Route exact path={paths.searchMovies}>
-                <screens.SearchMovies />
-              </Route>
-              <Route path={paths.searchMoviesResults}>
-                <screens.ResultsMovies />
-              </Route>
-              <Route exact path={paths.searchSeries}>
-                <screens.SearchSeries />
-              </Route>
-              <Route path={paths.searchSeriesResults}>
-                <screens.ResultsSeries />
-              </Route>
-              <Route path={`${paths.series}/:id`}>
-                <screens.Series />
-              </Route>
-              <Route path={`${paths.movie}/:id`}>
-                <screens.Movie />
-              </Route>
-              <Route path={`${paths.episode}/:id`}>
-                <screens.Episode />
-              </Route>
-            </Switch>
-          </div>
-          </Content>
-          <Footer className={styles.footer}>Training</Footer>
-      </Router>
-    </Layout>
-    </SavedProvider>
+    <NotificationProvider>
+      <SavedProvider>
+        <SavedItems />
+        <Layout className={`site-layout ${styles.layout}`} >
+          <Router>
+            <Navigation />
+            <Header className={`site-layout-sub-header-background ${styles.header}`} />
+            <Content className={styles.content}>
+              <div className={`site-layout-background ${styles.contentWrapper}`}>
+                <Switch>
+                  <Route exact path={paths.home}>
+                    <Home />
+                  </Route>
+                  <Route exact path={paths.searchEpisodes}>
+                    <screens.SearchEpisodes />
+                  </Route>
+                  <Route path={paths.searchEpisodesResults}>
+                    <screens.ResultsEpisodes />
+                  </Route>
+                  <Route exact path={paths.searchMovies}>
+                    <screens.SearchMovies />
+                  </Route>
+                  <Route path={paths.searchMoviesResults}>
+                    <screens.ResultsMovies />
+                  </Route>
+                  <Route exact path={paths.searchSeries}>
+                    <screens.SearchSeries />
+                  </Route>
+                  <Route path={paths.searchSeriesResults}>
+                    <screens.ResultsSeries />
+                  </Route>
+                  <Route path={`${paths.series}/:id`}>
+                    <screens.Series />
+                  </Route>
+                  <Route path={`${paths.movie}/:id`}>
+                    <screens.Movie />
+                  </Route>
+                  <Route path={`${paths.episode}/:id`}>
+                    <screens.Episode />
+                  </Route>
+                </Switch>
+              </div>
+            </Content>
+            <Footer className={styles.footer}>Training</Footer>
+          </Router>
+        </Layout>
+      </SavedProvider>
+    </NotificationProvider>
   </ReactQueryCacheProvider>
 );
 

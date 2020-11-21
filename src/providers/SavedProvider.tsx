@@ -1,4 +1,5 @@
-import React, { useReducer, useContext, createContext } from "react";
+import React, { useReducer, createContext } from "react";
+import { useNonNullableContext } from "../hooks/useNonNullableContext";
 import { ResourceType } from "../models/item";
 
 export const ADD_ITEM = "ADD_ITEM";
@@ -40,10 +41,8 @@ type SavedActions = AddItem | ClearItem | CloseItem | OpenSaveItems;
 
 const initState = { isOpen: false, items: {} };
 
-const SavedStateContext = createContext<State>(initState);
-const SavedDispatchContext = createContext<
-  React.Dispatch<SavedActions>
->(() => {});
+const SavedStateContext = createContext<State | undefined>(undefined);
+const SavedDispatchContext = createContext<React.Dispatch<SavedActions> | undefined>(undefined);
 
 const reducer = (state: State, action: SavedActions) => {
   switch(action.type) {
@@ -90,6 +89,6 @@ export const SavedProvider = ({ children }: Props) => {
   );
 };
 
-export const useSaved = () => useContext(SavedStateContext);
+export const useSaved = () => useNonNullableContext(SavedStateContext);
 export const useDispatchSaved = () =>
-  useContext(SavedDispatchContext);
+  useNonNullableContext(SavedDispatchContext);
