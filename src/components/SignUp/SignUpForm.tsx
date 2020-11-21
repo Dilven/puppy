@@ -1,34 +1,26 @@
-import { Button, Form as AntdForm, Input} from "antd";
+import { Alert, Button, Form as AntdForm, Input} from "antd";
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import * as z from 'zod';
+import { Controller, FieldErrors, useForm } from "react-hook-form";
+import { signUpFormSchema, FormData } from "../../schemas/sign-up-form";
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
 
-const signUpFormSchema = z
-  .object({
-    name: z.string(),
-    password: z.string(),
-    confirm: z.string(),
-  })
-  .refine(data => data.password === data.confirm, {
-    message: "Passwords don't match",
-    path: ['confirm'],
-  })
+const getErrorsMessages = (errors: FieldErrors<FormData>) => Object.values(errors).map(error => error?.message).filter(message => message)
 
 export const SignUpForm = () => {
   const { handleSubmit, control, errors } = useForm({
     resolver: zodResolver(signUpFormSchema)
   });
 
+  const errorsMessages = getErrorsMessages(errors);
+
   const onSubmit = handleSubmit(async (data: FormData) => {
     console.log('DEBUGGING: : SignUpForm -> data', data);
   })
-
 
   return (
     <AntdForm {...layout} onFinish={onSubmit}>
@@ -47,7 +39,7 @@ export const SignUpForm = () => {
         name="confirm"
         as={<Input.Password />}
       />
-      <p>{errors.confirm?.message}</p>
+      {errorsMessages.map(error => <Alert message={error} type="error" showIcon />)}
       <Button type="primary" htmlType="submit">
         Submit
       </Button>
