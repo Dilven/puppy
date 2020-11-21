@@ -9,3 +9,5 @@ export { ResultsSeries } from './ResultsSeries';
 export { Series } from './Series';
 export { Movie } from './Movie';
 export { Episode } from './Episode';
+
+export { Home } from './Home';
