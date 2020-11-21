@@ -23,6 +23,9 @@ export const Navigation = () => {
       >
       <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
+          <Menu.Item key={paths.signUp} icon={<UserOutlined />}>
+            <NavLink to={paths.signUp}>Sign up</NavLink>
+          </Menu.Item>
           <Menu.Item key={paths.home} icon={<UserOutlined />}>
             <NavLink to={paths.home}>Home</NavLink>
           </Menu.Item>

@@ -8,6 +8,9 @@ export const Routes = () => (
     <Route exact path={paths.home}>
       <screens.Home />
     </Route>
+    <Route exact path={paths.signUp}>
+      <screens.SignUp />
+    </Route>
     <Route exact path={paths.searchEpisodes}>
       <screens.SearchEpisodes />
     </Route>
