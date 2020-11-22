@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React from "react";
 import { Controller, FieldErrors, useForm } from "react-hook-form";
 import { signUpFormSchema, FormData } from "../../schemas/sign-up-form";
+import { useDispatchSignUp } from "../../providers/SignUpProvider";
 
 const layout = {
   labelCol: { span: 8 },
@@ -15,12 +16,11 @@ export const SignUpForm = () => {
   const { handleSubmit, control, errors } = useForm({
     resolver: zodResolver(signUpFormSchema)
   });
+  const dispatch = useDispatchSignUp();
 
   const errorsMessages = getErrorsMessages(errors);
 
-  const onSubmit = handleSubmit(async (data: FormData) => {
-    console.log('DEBUGGING: : SignUpForm -> data', data);
-  })
+  const onSubmit = handleSubmit(dispatch.signUp)
 
   return (
     <AntdForm {...layout} onFinish={onSubmit}>
