@@ -1,5 +1,4 @@
-import React, { createContext, useState, Dispatch, SetStateAction, useReducer } from "react";
-import { useNonNullableContext } from "../hooks/useNonNullableContext";
+import { useState, useReducer } from "react";
 import { FormData } from "../schemas/sign-up-form";
 
 const fakeCreateUser = (formData: FormData) => {
@@ -9,23 +8,7 @@ const fakeCreateUser = (formData: FormData) => {
 
 type Status = 'wait' | 'process' | 'finish' | 'error' | undefined;
 
-type State = {
-  status: Status,
-  step: number;
-}
-
 type ActionsChangeStep = "next" | "previous" | "reset";
-
-type Props = {
-  children: React.ReactNode;
-}
-
-const SignUpStateContext = createContext<State | undefined>(undefined);
-const SignUpDispatchContext = createContext<{ 
-  changeStatus: Dispatch<SetStateAction<Status>>
-  changeStep: Dispatch<ActionsChangeStep>,
-  signUp: (formData: FormData) => Promise<void>
-} | undefined>(undefined);
 
 const defaultStep = 0;
 
@@ -42,7 +25,7 @@ const reducerStep = (state = defaultStep, action: ActionsChangeStep) => {
   }
 }
 
-export const SignUpProvider = ({ children }: Props) => {
+export const useSignUp = () => {
   const [status, changeStatus] = useState<Status>(undefined);
   const [step, changeStep] = useReducer(reducerStep, defaultStep);
   
@@ -54,18 +37,16 @@ export const SignUpProvider = ({ children }: Props) => {
         changeStatus(undefined)
         changeStep('next')
       } catch(e) {
+        console.log('DEBUGGING: : useSignUp -> e', e);
         changeStatus('error');
       }
   }
 
-  return (
-    <SignUpDispatchContext.Provider value={{ changeStatus, changeStep, signUp }}>
-      <SignUpStateContext.Provider value={{ status, step  }}>
-        {children}
-      </SignUpStateContext.Provider>
-    </SignUpDispatchContext.Provider>
-  );
+  return {
+    step,
+    status,
+    changeStatus,
+    changeStep,
+    signUp,
+  }
 };
-
-export const useSignUp = () => useNonNullableContext(SignUpStateContext);
-export const useDispatchSignUp = () => useNonNullableContext(SignUpDispatchContext);

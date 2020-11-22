@@ -27,9 +27,9 @@ const App = () => (
             <Navigation />
             <Header className={`site-layout-sub-header-background ${styles.header}`} />
             <Content className={styles.content}>
-              <div className={`site-layout-background ${styles.contentWrapper}`}>
+              <main className={`site-layout-background ${styles.contentWrapper}`}>
                 <Routes />
-              </div>
+              </main>
             </Content>
             <Footer className={styles.footer}>Training</Footer>
           </Router>
