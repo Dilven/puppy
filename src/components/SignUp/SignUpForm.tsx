@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React from "react";
 import { Controller, FieldErrors, useForm } from "react-hook-form";
 import { signUpFormSchema, FormData } from "../../schemas/sign-up-form";
+import styles from './SignUpForm.module.css';
 
 const layout = {
   labelCol: { span: 8 },
@@ -24,7 +25,7 @@ export const SignUpForm = ({ signUp }: Props) => {
   const onSubmit = handleSubmit(signUp)
 
   return (
-    <AntdForm {...layout} onFinish={onSubmit}>
+    <AntdForm {...layout} onFinish={onSubmit} className={styles.form}>
       <Controller
         control={control}
         name="name"
@@ -40,10 +41,15 @@ export const SignUpForm = ({ signUp }: Props) => {
         name="confirm"
         as={<Input.Password />}
       />
+      <div>
+        <Button type="primary">
+          Sign in
+        </Button>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </div>
       {errorsMessages.map(error => <Alert message={error} type="error" showIcon />)}
-      <Button type="primary" htmlType="submit">
-        Submit
-      </Button>
     </AntdForm>
   );
 };
