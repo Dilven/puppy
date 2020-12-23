@@ -1,0 +1,8 @@
+.card {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.image {
+  cursor: pointer;
+}
