@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useQueryClient, useMutation } from "react-query";
 import { QueryKey } from "../constants/queries-keys";
 import { DEFAULT_PAGE } from "../constants/search-params";
-import { SearchQuery } from "../helpers/api";
+import { SearchQuery } from "../helpers/queries";
 import { rejectEmpty } from "../helpers/reject-empty";
 import { getQueryParams } from "../helpers/search-params";
 import { SearchParams } from "../models/search-params";

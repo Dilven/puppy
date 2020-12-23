@@ -1,5 +1,5 @@
 import { useQueryClient } from "react-query";
-import { getEpisode, getMovie, getSeries } from "../helpers/api";
+import { getEpisode, getMovie, getSeries } from "../helpers/queries";
 import { ResourceType } from "../models/item";
 
 const prefetchQueries = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { searchEpisodes } from '../../../helpers/api';
+import { searchEpisodes } from '../../../helpers/queries';
 import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
 import { EPISODES_QUERY_KEY } from '../../../constants/queries-keys';

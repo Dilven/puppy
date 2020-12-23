@@ -1,5 +1,5 @@
 import React from "react"
-import { SearchQuery } from "../../helpers/api";
+import { SearchQuery } from "../../helpers/queries";
 import { QueryKey } from "../../constants/queries-keys";
 import { Button, DatePicker, Input, Form as AntdForm } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { searchMovies } from '../../../helpers/api';
+import { searchMovies } from '../../../helpers/queries';
 import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
 import { MOVIES_QUERY_KEY } from '../../../constants/queries-keys';
