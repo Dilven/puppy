@@ -1,7 +1,7 @@
-import { ApiSearchParams } from "../../shared/models/api-search-params";
+import { ApiSearchQuery } from "../../shared/models/api-search-params";
 import { paramsAliases } from "../constants/params-aliases";
 
-export const getQueryParams = ({ name, year, plot, id, page }: ApiSearchParams) => {
+export const getQueryParams = ({ name, year, plot, id, page }: ApiSearchQuery) => {
   const params = new URLSearchParams()
   if(name) params.set(paramsAliases.name, name);
   if(year) params.set(paramsAliases.year, `${year}`);

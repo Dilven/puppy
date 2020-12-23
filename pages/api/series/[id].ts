@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { MovieService } from '../../../api/external-service'
+import { ExternalService } from '../../../api/external-service'
+import { validateGetQuery } from '../../../api/validation';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { query: { id } } = req
-  const movie = await MovieService.getEpisode(id as string)
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify(movie));
+  const id = validateGetQuery(req.query.id);
+  const series = await ExternalService.getEpisode(id)
+  res.status(200).json(JSON.stringify(series));
 }
 
 export default handler;

@@ -1,4 +1,5 @@
 import * as z from 'zod';
-import { ApiSearchParamsSchema } from './../schemas/api-search-params';
+import { ApiSearchQuerySchema, ApiGetQuerySchema } from '../schemas/api-query';
 
-export type ApiSearchParams = z.infer<typeof ApiSearchParamsSchema>; 
+export type ApiSearchQuery = z.infer<typeof ApiSearchQuerySchema>; 
+export type ApiGetQuery = z.infer<typeof ApiGetQuerySchema>; 

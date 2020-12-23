@@ -5,7 +5,7 @@ import { QueryKey } from "../constants/queries-keys";
 import { DEFAULT_PAGE } from "../constants/search-params";
 import { rejectEmpty } from "../helpers/reject-empty";
 import { getQueryParams } from "../helpers/search-params";
-import { ApiSearchParams } from "../../shared/models/api-search-params";
+import { ApiSearchQuery } from "../../shared/models/api-search-params";
 import { SearchQuery } from "../helpers/api";
 
 type FormData = {
@@ -29,7 +29,7 @@ export const useSearchForm = (queryKey: QueryKey, query: SearchQuery, redirectPa
 
   const onSubmit = handleSubmit(async (data: FormData) => {
     const year = data.year?.year();
-    const params: ApiSearchParams = { ...data, year: year ? `${year}` : null }
+    const params: ApiSearchQuery = { ...data, year: year ? `${year}` : null }
     await mutate(rejectEmpty(params));
   })
 

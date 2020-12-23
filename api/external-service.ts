@@ -63,7 +63,7 @@ const getEpisode = (id: string) => get('episode', id);
 
 export type SearchQuery = typeof searchMovies | typeof searchSeries | typeof searchEpisodes; 
 
-export const MovieService = {
+export const ExternalService = {
   searchMovies,
   searchSeries,
   searchEpisodes,
