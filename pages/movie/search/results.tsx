@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { searchMovies } from '../../../helpers/queries';
-import { Results } from '../../../components/Results/Results';
-import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
-import { MOVIES_QUERY_KEY } from '../../../constants/queries-keys';
-import { useSearchParams } from '../../../hooks/useSearchParams';
+import { searchMovies } from '../../../client/helpers/queries';
+import { Results } from '../../../client/components/Results/Results';
+import { ResultsPageHeader } from '../../../client/components/ResultsPageHeader';
+import { MOVIES_QUERY_KEY } from '../../../client/constants/queries-keys';
+import { useSearchParams } from '../../../client/hooks/useSearchParams';
 
 const ResultsMovies = () => {
   const searchParams = useSearchParams()

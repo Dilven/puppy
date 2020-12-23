@@ -7,14 +7,16 @@ import { SearchParams } from '../../shared/models/search-params';
 
 type ResourceType = Item['Type'];
 
+const baseApiPathname = '/api/';
+
 export const get = async <T extends ResourceType>(type: T, id: SearchParams['id']): Promise<z.infer<PreviewSchemasType[T]>> => {
-  const { data } = await axios.get<unknown>(`/api/${type}/${id}`);
+  const { data } = await axios.get<unknown>(`${baseApiPathname}${type}/${id}`);
   return validatePreview(type, data);
 }
 
 export const search = async <T extends ResourceType>(type: T, params: SearchParams): Promise<z.infer<SearchSchemasType[T]>> => {
   const queryParams = getQueryParams(params)
-  const { data } = await axios.get<unknown>(`/api/${type}?${queryParams}`);
+  const { data } = await axios.get<unknown>(`${baseApiPathname}${type}?${queryParams}`);
   const results = z.object({ Search: z.array(z.unknown())}).parse(data).Search
   return validateSearch(type, results)
 }
