@@ -8,7 +8,6 @@ import { useSearchParams } from '../../../client/hooks/useSearchParams';
 
 const ResultsSeries = () => {
   const searchParams = useSearchParams()
-
   const { data, isLoading, error } = useQuery([SERIES_QUERY_KEY, searchParams], async () => await searchSeries(searchParams))
   
   return (

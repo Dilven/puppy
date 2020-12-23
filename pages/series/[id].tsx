@@ -1,15 +1,14 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useRouter } from 'next/router'
 import { Error } from '../../client/components/Error';
 import { SeriesPreview } from '../../client/components/SeriePreview';
 import { Spin } from 'antd';
 import { getSeries } from '../../client/helpers/api';
+import { useQueryId } from '../../client/hooks/useQueryId';
 
 const Series = () => {
-  const router = useRouter()
-  const { id } = router.query
-  const { data, isLoading, error } = useQuery(id, () => getSeries(id as string), {
+  const id = useQueryId();
+  const { data, isLoading, error } = useQuery(id, () => getSeries(id), {
     retry: false,
   })
   
