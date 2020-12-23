@@ -1,8 +1,8 @@
-import { ResourceType } from "../models/item"
-import { EpisodeSchema, EpisodePreviewSchema } from "../schemas/episode";
-import { MovieSchema, MoviePreviewSchema } from "../schemas/movie";
-import { SeriesSchema, SeriesPreviewSchema } from "../schemas/series";
 import * as z from 'zod';
+import { EpisodeSchema, EpisodePreviewSchema } from "./schemas/episode";
+import { MovieSchema, MoviePreviewSchema } from "./schemas/movie";
+import { SeriesSchema, SeriesPreviewSchema } from "./schemas/series";
+import { ResourceType } from "./models/item";
 
 const SearchSchemas = {
   movie: z.array(MovieSchema),

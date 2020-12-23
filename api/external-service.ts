@@ -1,9 +1,9 @@
 import * as z from 'zod';
 import axios from 'axios';
-import { getQueryParams } from '../helpers/search-params';
-import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from '../helpers/validation';
-import { ResourceType } from '../models/item';
-import { SearchParams } from '../models/search-params';
+import { getQueryParams } from '../client/helpers/search-params';
+import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from '../shared/validation';
+import { ResourceType } from '../shared/models/item';
+import { SearchParams } from '../shared/models/search-params';
 
 const apiRequest = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',

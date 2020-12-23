@@ -1,14 +1,14 @@
 import React from 'react';
 import 'antd/dist/antd.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { Navigation } from '../components/Navigation/Navigation';
 import { Layout } from 'antd';
 import { ReactQueryDevtools } from 'react-query-devtools'
-import { SavedProvider } from '../providers/SavedProvider';
-import { NotificationProvider } from '../providers/NotificationProvider';
-import { SavedItems } from '../components/SavedItems';
-import { defaultOptions } from '../config/cache';
+import { SavedProvider } from '../client/providers/SavedProvider';
+import { NotificationProvider } from '../client/providers/NotificationProvider';
+import { SavedItems } from '../client/components/SavedItems';
+import { defaultOptions } from '../client/config/cache';
 import styles from './app.module.css';
+import { Navigation } from '../client/components/Navigation/Navigation';
 
 
 const { Header, Content, Footer } = Layout;

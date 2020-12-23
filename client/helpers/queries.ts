@@ -1,9 +1,9 @@
 import * as z from 'zod';
 import { getQueryParams } from './search-params';
-import { Item } from '../models/item';
-import { SearchParams } from '../models/search-params';
-import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from './validation';
+import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from '../../shared/validation';
 import axios from 'axios';
+import { Item } from '../../shared/models/item';
+import { SearchParams } from '../../shared/models/search-params';
 
 type ResourceType = Item['Type'];
 
