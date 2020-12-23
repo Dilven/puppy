@@ -7,15 +7,14 @@ import { SavedProvider } from '../client/providers/SavedProvider';
 import { NotificationProvider } from '../client/providers/NotificationProvider';
 import { SavedItems } from '../client/components/SavedItems';
 import { defaultOptions } from '../client/config/cache';
-import styles from './app.module.css';
 import { Navigation } from '../client/components/Navigation/Navigation';
+import styles from '../client/styles/app.module.css'
 
 
 const { Header, Content, Footer } = Layout;
 
 const queryCache = new QueryClient({ defaultOptions })
 
-//TODO REMOVE UNNECESSARY STYLE
 const MyApp = ({ Component, pageProps }) => {
   return (
     <QueryClientProvider client={queryCache}>
