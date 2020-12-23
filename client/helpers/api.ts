@@ -10,7 +10,7 @@ type ResourceType = Item['Type'];
 
 const baseApiPathname = '/api/';
 
-export const get = async <T extends ResourceType>(type: T, id: ApiGetQuery): Promise<z.infer<PreviewSchemasType[T]>> => {
+export const get = async <T extends ResourceType>(type: T, id: ApiGetQuery['id']): Promise<z.infer<PreviewSchemasType[T]>> => {
   const { data } = await axios.get<unknown>(`${baseApiPathname}${type}/${id}`);
   return validatePreview(type, data);
 }

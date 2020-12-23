@@ -7,4 +7,4 @@ export const ApiSearchQuerySchema = z.object({
   page: z.string().nullable(),
 })
 
-export const ApiGetQuerySchema = z.string();
+export const ApiGetQuerySchema = z.object({ id: z.string()});

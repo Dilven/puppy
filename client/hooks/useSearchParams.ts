@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { paramsAliases } from "../constants/params-aliases";
+import { apiQueryKeys } from "../../shared/api-query-keys";
 import { rejectEmpty } from "../helpers/reject-empty";
 
 export const useSearchParams = () => {
@@ -8,11 +8,10 @@ export const useSearchParams = () => {
   const searchParams = new URLSearchParams(history.location.search);
 
   const params = {
-    name: searchParams.get(paramsAliases.name),
-    year: searchParams.get(paramsAliases.year),
-    plot: searchParams.get(paramsAliases.plot),
-    page: searchParams.get(paramsAliases.page),
-    id: searchParams.get(paramsAliases.id),
+    name: searchParams.get(apiQueryKeys.name),
+    year: searchParams.get(apiQueryKeys.year),
+    plot: searchParams.get(apiQueryKeys.plot),
+    page: searchParams.get(apiQueryKeys.page),
   }
 
   return rejectEmpty(params);
