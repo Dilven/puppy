@@ -4,13 +4,22 @@ import { Error } from '../../client/components/Error';
 import { Spin } from 'antd';
 import { MoviePreview } from '../../client/components/MoviePreview';
 import { getMovie } from '../../client/helpers/api';
-import { useQueryId } from '../../client/hooks/useQueryId';
-import { GetStaticProps } from 'next';
-import { initialParams } from '../../client/helpers/initial-params';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { getInitialParams } from '../../client/helpers/initial-params';
 
-const Movie = () => {
-  const id = useQueryId();
+export const getServerSideProps: GetServerSideProps = async ({ params}) => {
+  const id = getInitialParams(params)
+  const initialData = await getMovie(id);
+  return {
+    props: { id, initialData }
+ }
+};
+
+type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+
+const Movie = ({ id, initialData }: Props) => {
   const { data, isLoading, error } = useQuery(id, () => getMovie(id), {
+    initialData,
     retry: false,
   })
   
@@ -21,7 +30,5 @@ const Movie = () => {
     <MoviePreview {...data}/>
   )
 }
-
-export const getServerSideProps: GetStaticProps = initialParams;
 
 export default Movie;

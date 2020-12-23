@@ -4,13 +4,23 @@ import { getEpisode } from '../../client/helpers/api';
 import { Error } from '../../client/components/Error';
 import { Spin } from 'antd';
 import { EpisodePreview } from '../../client/components/EpisodePreview';
-import { useQueryId } from '../../client/hooks/useQueryId';
-import { GetStaticProps } from 'next';
-import { initialParams } from '../../client/helpers/initial-params';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { getInitialParams } from '../../client/helpers/initial-params';
 
-const Episode = () => {
-  const id = useQueryId();
+
+export const getServerSideProps: GetServerSideProps = async ({ params}) => {
+  const id = getInitialParams(params)
+  const initialData = await getEpisode(id);
+  return {
+    props: { id, initialData }
+ }
+};
+
+type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+
+const Episode = ({ id, initialData }: Props) => {
   const { data, isLoading, error } = useQuery(id, () => getEpisode(id), {
+    initialData,
     retry: false,
   })
   if(isLoading) return <Spin size="large" />
@@ -20,7 +30,5 @@ const Episode = () => {
     <EpisodePreview {...data}/>
   )
 }
-
-export const getServerSideProps: GetStaticProps = initialParams;
 
 export default Episode;

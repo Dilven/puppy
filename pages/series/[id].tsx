@@ -4,13 +4,22 @@ import { Error } from '../../client/components/Error';
 import { SeriesPreview } from '../../client/components/SeriePreview';
 import { Spin } from 'antd';
 import { getSeries } from '../../client/helpers/api';
-import { useQueryId } from '../../client/hooks/useQueryId';
-import { GetStaticProps } from 'next';
-import { initialParams } from '../../client/helpers/initial-params';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { getInitialParams } from '../../client/helpers/initial-params';
 
-const Series = () => {
-  const id = useQueryId();
+export const getServerSideProps: GetServerSideProps = async ({ params}) => {
+  const id = getInitialParams(params)
+  const initialData = await getSeries(id);
+  return {
+    props: { id, initialData }
+ }
+};
+
+type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+
+const Series = ({ id, initialData }: Props) => {
   const { data, isLoading, error } = useQuery(id, () => getSeries(id), {
+    initialData,
     retry: false,
   })
   
@@ -21,7 +30,5 @@ const Series = () => {
     <SeriesPreview {...data} />
   )
 }
-
-export const getServerSideProps: GetStaticProps = initialParams;
 
 export default Series;
