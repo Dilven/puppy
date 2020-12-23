@@ -1,15 +1,16 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router'
-import { getMovie } from '../helpers/api'
-import { Error } from '../components/Error';
+import { getMovie } from '../../helpers/api'
+import { Error } from '../../components/Error';
 import { Spin } from 'antd';
-import { MoviePreview } from '../components/MoviePreview';
+import { MoviePreview } from '../../components/MoviePreview';
 
 const Movie = () => {
   const router = useRouter()
-  const { pid } = router.query
-  const { data, isLoading, error } = useQuery(pid, getMovie, {
+  //TODO 
+  const { id } = router.query
+  const { data, isLoading, error } = useQuery(id, () => getMovie(id as string), {
     retry: false,
   })
   

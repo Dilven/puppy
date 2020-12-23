@@ -1,0 +1,24 @@
+.layout {
+  margin-left: 200px;
+  height: 100%;
+}
+
+.header {
+  padding: 0;
+  height: 53px;
+}
+
+.content {
+  margin: 24px 16px 0;
+  overflow: initial;
+  height: 100%;
+}
+
+.contentWrapper {
+  padding: 24;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+}
