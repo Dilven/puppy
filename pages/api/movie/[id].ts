@@ -1,10 +1,10 @@
 import axios from 'axios';
 import * as z from 'zod';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getQueryParams } from '../../helpers/search-params';
-import { PreviewSchemasType, validatePreview, SearchSchemasType, validateSearch } from '../../helpers/validation';
-import { ResourceType } from '../../models/item';
-import { SearchParams } from '../../models/search-params';
+import { getQueryParams } from '../../../helpers/search-params';
+import { PreviewSchemasType, validatePreview, SearchSchemasType, validateSearch } from '../../../helpers/validation';
+import { ResourceType } from '../../../models/item';
+import { SearchParams } from '../../../models/search-params';
 
 const apiRequest = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
@@ -17,11 +17,11 @@ const apiRequest = axios.create({
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log('DEBUGGING:  ~ file: movie.ts ~ line 26 ~ handler ~ req.query', req.params);
-  // const { data } = await searchMovies(params)
+  const { query: { id } } = req
+  const movie = await getMovie(id as string)
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify({ name: 'John Doe' }))
+  res.end(JSON.stringify(movie));
 }
 
 export const get = async <T extends ResourceType>(type: T, id: SearchParams['id']): Promise<z.infer<PreviewSchemasType[T]>> => {

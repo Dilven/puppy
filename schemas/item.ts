@@ -28,4 +28,8 @@ export const ItemPreviewSchema = ItemSchema.extend({
   Writer: z.string(),
   imdbRating:  z.string(),
   imdbVotes: z.string(),
+  Production: z.string(),
+  BoxOffice: z.string(),
+  Website: z.string(),
+  DVD: z.string(),
 })
