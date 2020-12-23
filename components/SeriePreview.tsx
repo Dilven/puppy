@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, Image, Row, Col } from 'antd';
-import { SeriesPreview } from '../models/series';
+import { SeriesPreview as SeriesPreviewType } from '../models/series';
 
-type Props = SeriesPreview;
+type Props = SeriesPreviewType;
 
-export const SeriePreview = (props: Props) => {
+export const SeriesPreview = (props: Props) => {
   return (
     <Card title={props.Title}>
       <Row>

@@ -13,8 +13,7 @@ const { Sider } = Layout;
 export const Navigation = () => {
   const dispatch = useDispatchSaved();
   const saved = useSaved();
-  const router = useRouter();
-  const pathname = Object.keys(router.query).join('/');
+  const { pathname } = useRouter();
   const contextHolder = useNotification();
 
   return (

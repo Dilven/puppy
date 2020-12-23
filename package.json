@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@hookform/resolvers": "^1.2.0",
     "antd": "^4.9.4",
     "next": "10.0.4",
     "ramda": "^0.27.1",
@@ -16,6 +17,7 @@
     "react-hook-form": "^6.13.1",
     "react-query": "^3.5.1",
     "react-query-devtools": "^2.6.3",
+    "yup": "^0.32.8",
     "zod": "^1.11.11"
   },
   "devDependencies": {

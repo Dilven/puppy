@@ -1,15 +1,15 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router'
-import { getSerie } from '../../helpers/api';
+import { getSeries } from '../../helpers/api';
 import { Error } from '../../components/Error';
-import { SeriePreview } from '../../components/SeriePreview';
+import { SeriesPreview } from '../../components/SeriePreview';
 import { Spin } from 'antd';
 
-const Serie = () => {
+const Series = () => {
   const router = useRouter()
   const { id } = router.query
-  const { data, isLoading, error } = useQuery(id, () => getSerie(id as string), {
+  const { data, isLoading, error } = useQuery(id, () => getSeries(id as string), {
     retry: false,
   })
   
@@ -17,8 +17,8 @@ const Serie = () => {
   if(!data || error) return <Error />
 
   return (
-    <SeriePreview {...data} />
+    <SeriesPreview {...data} />
   )
 }
 
-export default Serie;
+export default Series;
