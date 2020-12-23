@@ -1,8 +1,8 @@
 import React from 'react';
-import { searchEpisodes } from '../../../helpers/queries';
-import { Form } from '../../../components/Form/Form';
-import { paths } from '../../../config/paths';
-import { EPISODES_QUERY_KEY } from '../../../constants/queries-keys';
+import { Form } from '../../../client/components/Form/Form';
+import { paths } from '../../../client/config/paths';
+import { EPISODES_QUERY_KEY } from '../../../client/constants/queries-keys';
+import { searchEpisodes } from '../../../client/helpers/api';
 
 const SearchEpisodes = () => (
   <div>

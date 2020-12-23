@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router'
-import { getSeries } from '../../helpers/queries';
-import { Error } from '../../components/Error';
-import { SeriesPreview } from '../../components/SeriePreview';
+import { Error } from '../../client/components/Error';
+import { SeriesPreview } from '../../client/components/SeriePreview';
 import { Spin } from 'antd';
+import { getSeries } from '../../client/helpers/api';
 
 const Series = () => {
   const router = useRouter()

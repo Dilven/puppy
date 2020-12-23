@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { searchSeries } from '../../../client/helpers/queries';
 import { Results } from '../../../client/components/Results/Results';
 import { ResultsPageHeader } from '../../../client/components/ResultsPageHeader';
 import { SERIES_QUERY_KEY } from '../../../client/constants/queries-keys';
+import { searchSeries } from '../../../client/helpers/api';
 import { useSearchParams } from '../../../client/hooks/useSearchParams';
 
 const ResultsSeries = () => {

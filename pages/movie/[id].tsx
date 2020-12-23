@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router'
-import { getMovie } from '../../client/helpers/queries'
 import { Error } from '../../client/components/Error';
 import { Spin } from 'antd';
 import { MoviePreview } from '../../client/components/MoviePreview';
+import { getMovie } from '../../client/helpers/api';
 
 const Movie = () => {
   const router = useRouter()

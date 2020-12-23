@@ -1,8 +1,8 @@
+import Form from 'antd/lib/form/Form';
 import React from 'react';
-import { searchMovies } from '../../../helpers/queries';
-import { Form } from '../../../components/Form/Form';
-import { paths } from '../../../config/paths';
-import { MOVIES_QUERY_KEY } from '../../../constants/queries-keys';
+import { paths } from '../../../client/config/paths';
+import { MOVIES_QUERY_KEY } from '../../../client/constants/queries-keys';
+import { searchMovies } from '../../../client/helpers/api';
 
 const SearchMovies = () => (
   <div>

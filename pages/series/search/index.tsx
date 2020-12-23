@@ -1,8 +1,8 @@
+import Form from 'antd/lib/form/Form';
 import React from 'react';
-import { searchSeries } from '../../../helpers/queries';
-import { Form } from '../../../components/Form/Form';
-import { paths } from '../../../config/paths';
-import { SERIES_QUERY_KEY } from '../../../constants/queries-keys';
+import { paths } from '../../../client/config/paths';
+import { SERIES_QUERY_KEY } from '../../../client/constants/queries-keys';
+import { searchSeries } from '../../../client/helpers/api';
 
 const SearchSeries = () => (
   <div>

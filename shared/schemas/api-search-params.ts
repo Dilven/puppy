@@ -1,7 +1,9 @@
 import * as z from 'zod';
 
 export const ApiSearchParamsSchema = z.object({
-  name: z.string().optional(),
-  year: z.string().optional(),
-  page: z.number(),
+  name: z.string().nullable(),
+  year: z.string().nullable(),
+  plot: z.string().nullable(),
+  page: z.string().nullable(),
+  id: z.string().nullable(),
 })

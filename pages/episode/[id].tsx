@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router'
-import { getEpisode } from '../../helpers/queries';
-import { Error } from '../../components/Error';
+import { getEpisode } from '../../client/helpers/api';
+import { Error } from '../../client/components/Error';
 import { Spin } from 'antd';
-import { EpisodePreview } from '../../components/EpisodePreview';
+import { EpisodePreview } from '../../client/components/EpisodePreview';
 
 const Episode = () => {
   const router = useRouter()

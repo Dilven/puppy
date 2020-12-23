@@ -1,9 +1,23 @@
 import * as z from 'zod';
 import axios from 'axios';
-import { getQueryParams } from '../client/helpers/search-params';
 import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from '../shared/validation';
 import { ResourceType } from '../shared/models/item';
-import { SearchParams } from '../shared/models/search-params';
+
+export type SearchParams = {
+  name?: string | null;
+  year?: string | null;
+  plot?: string | null;
+  page?: string | null;
+  id?: string | null;
+}
+
+export const paramsAliases: Record<keyof SearchParams, string> = {
+  name: 's',
+  year: 'y',
+  plot: 'plot',
+  id: 'i',
+  page: 'page',
+}
 
 const apiRequest = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
@@ -14,6 +28,17 @@ const apiRequest = axios.create({
     "useQueryString": true
   }
 });
+
+const getQueryParams = ({ name, year, plot, id, page }: SearchParams) => {
+  const params = new URLSearchParams()
+  if(name) params.set(paramsAliases.name, name);
+  if(year) params.set(paramsAliases.year, `${year}`);
+  if(plot) params.set(paramsAliases.plot, plot);
+  if(id) params.set(paramsAliases.id, id);
+  if(page) params.set(paramsAliases.page, `${page}`);
+  return params.toString();
+}
+
 
 const get = async <T extends ResourceType>(type: T, id: SearchParams['id']): Promise<z.infer<PreviewSchemasType[T]>> => {
   const queryParams = getQueryParams({ id })
