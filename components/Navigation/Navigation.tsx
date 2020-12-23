@@ -1,0 +1,62 @@
+import React from 'react';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { paths } from '../../config/paths';
+import { Layout, Menu, Button, Badge } from 'antd';
+import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import { OPEN_SAVED_ITEMS, useDispatchSaved, useSaved } from '../../providers/SavedProvider';
+import styles from './Navigation.module.css';
+import { useNotification } from '../../providers/NotificationProvider';
+
+const { Sider } = Layout;
+
+export const Navigation = () => {
+  const dispatch = useDispatchSaved();
+  const saved = useSaved();
+  const router = useRouter();
+  const pathname = Object.keys(router.query).join('/');
+  const contextHolder = useNotification();
+
+  return (
+    <Layout>
+      {contextHolder}
+      <Sider
+        className={styles.sider}
+      >
+      <div className="logo" />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
+          <Menu.Item key={paths.signUp} icon={<UserOutlined />}>
+            <Link href={paths.signUp}>Sign up</Link>
+          </Menu.Item>
+          <Menu.Item key={paths.home} icon={<UserOutlined />}>
+            <Link href={paths.home}>Home</Link>
+          </Menu.Item>
+          <Menu.Item key={paths.searchMovies} icon={<VideoCameraOutlined />}>
+            <Link href={paths.searchMovies}>Search movies</Link>
+          </Menu.Item>
+          <Menu.Item key={paths.searchSeries} icon={<UploadOutlined />}>
+            <Link href={paths.searchSeries}>Search series</Link>
+          </Menu.Item>
+          <Menu.Item key={paths.searchEpisodes} icon={<UserOutlined />}>
+            <Link href={paths.searchEpisodes}>Search episodes</Link>
+          </Menu.Item>
+        </Menu>
+        <div className={styles.savedButtonWrapper}>
+          <Badge 
+            count={Object.keys(saved.items).length} 
+          >
+            <Button 
+              block
+              className={styles.savedButton}
+              type="dashed" 
+              icon={<PlusSquareOutlined />}
+              onClick={() => dispatch({ type: OPEN_SAVED_ITEMS })}
+            >
+              Saved
+            </Button>
+          </Badge>
+        </div>
+      </Sider>
+    </Layout>
+  )
+}
