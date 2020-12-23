@@ -5,6 +5,8 @@ import { Error } from '../../client/components/Error';
 import { Spin } from 'antd';
 import { EpisodePreview } from '../../client/components/EpisodePreview';
 import { useQueryId } from '../../client/hooks/useQueryId';
+import { GetStaticProps } from 'next';
+import { initialParams } from '../../client/helpers/initial-params';
 
 const Episode = () => {
   const id = useQueryId();
@@ -18,5 +20,7 @@ const Episode = () => {
     <EpisodePreview {...data}/>
   )
 }
+
+export const getServerSideProps: GetStaticProps = initialParams;
 
 export default Episode;

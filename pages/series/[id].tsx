@@ -5,6 +5,8 @@ import { SeriesPreview } from '../../client/components/SeriePreview';
 import { Spin } from 'antd';
 import { getSeries } from '../../client/helpers/api';
 import { useQueryId } from '../../client/hooks/useQueryId';
+import { GetStaticProps } from 'next';
+import { initialParams } from '../../client/helpers/initial-params';
 
 const Series = () => {
   const id = useQueryId();
@@ -19,5 +21,7 @@ const Series = () => {
     <SeriesPreview {...data} />
   )
 }
+
+export const getServerSideProps: GetStaticProps = initialParams;
 
 export default Series;

@@ -5,6 +5,8 @@ import { Spin } from 'antd';
 import { MoviePreview } from '../../client/components/MoviePreview';
 import { getMovie } from '../../client/helpers/api';
 import { useQueryId } from '../../client/hooks/useQueryId';
+import { GetStaticProps } from 'next';
+import { initialParams } from '../../client/helpers/initial-params';
 
 const Movie = () => {
   const id = useQueryId();
@@ -19,5 +21,7 @@ const Movie = () => {
     <MoviePreview {...data}/>
   )
 }
+
+export const getServerSideProps: GetStaticProps = initialParams;
 
 export default Movie;
