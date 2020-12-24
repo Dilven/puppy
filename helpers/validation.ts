@@ -22,7 +22,7 @@ export type SearchSchemasType = typeof SearchSchemas;
 
 type Schemas = PreviewSchemasType[keyof PreviewSchemasType] | SearchSchemasType[keyof SearchSchemasType]
 
-export const validate = <T extends Schemas>(schema: T, item: unknown): z.infer<T> => schema.parse(item);
+const validate = <T extends Schemas>(schema: T, item: unknown): z.infer<T> => schema.parse(item);
 export const validateSearch = <T extends ResourceType>(type: T, item: unknown) => validate(SearchSchemas[type], item)
 export const validatePreview = <T extends ResourceType>(type: T, item: unknown) => validate(PreviewSchemas[type], item)
 

@@ -998,6 +998,14 @@ chalk@4.1.0, chalk@^4.1.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chalk@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-3.0.0.tgz#3f73c2bf526591f574cc492c51e2456349f844e4"
+  integrity sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
 chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
@@ -4670,6 +4678,14 @@ ts-toolbelt@^6.15.1:
   resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-6.15.5.tgz#cb3b43ed725cb63644782c64fbcad7d8f28c0a83"
   integrity sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==
 
+ts-unused-exports@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/ts-unused-exports/-/ts-unused-exports-7.0.0.tgz#e8d228b03c9d8f07d3655fe768d890d5d5512686"
+  integrity sha512-KSFhNUNt5I6jddGdp2osc6MuxOdgmtNwRLeQ9LeDuoItR1qcRtG8May0a8OShyWxpMGJGaN9WSDtqY1N4u7SIA==
+  dependencies:
+    chalk "^3.0.0"
+    tsconfig-paths "^3.9.0"
+
 tsconfig-paths-webpack-plugin@3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/tsconfig-paths-webpack-plugin/-/tsconfig-paths-webpack-plugin-3.3.0.tgz#a7461723c20623ca9148621a5ce36532682ad2ff"
@@ -4679,7 +4695,7 @@ tsconfig-paths-webpack-plugin@3.3.0:
     enhanced-resolve "^4.0.0"
     tsconfig-paths "^3.4.0"
 
-tsconfig-paths@^3.4.0:
+tsconfig-paths@^3.4.0, tsconfig-paths@^3.9.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.9.0.tgz#098547a6c4448807e8fcb8eae081064ee9a3c90b"
   integrity sha512-dRcuzokWhajtZWkQsDVKbWyY+jgcLC5sqJhg2PSgf4ZkH2aHPvaOY8YWGhmjb68b5qqTfasSsDO9k7RUiEmZAw==

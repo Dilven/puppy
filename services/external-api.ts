@@ -12,7 +12,7 @@ const setLimitExceeded = (remainingRequests?: number) => { limitExceeded = !rema
 
 const SearchSchema = z.object({ Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string()});
 
-export const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string> = {
+const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string> = {
   name: 's',
   year: 'y',
   plot: 'plot',
@@ -69,8 +69,6 @@ const searchEpisodes = (params: ApiSearchQuery) => search(EPISODE_TYPE, params);
 const getSeries = (id: string) => get(SERIES_TYPE, id);
 const getMovie = (id: string) => get(MOVIE_TYPE, id);
 const getEpisode = (id: string) => get(EPISODE_TYPE, id);
-
-export type SearchQuery = typeof searchMovies | typeof searchSeries | typeof searchEpisodes; 
 
 export const ExternalService = {
   searchMovies,

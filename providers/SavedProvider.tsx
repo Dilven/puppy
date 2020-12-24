@@ -4,7 +4,7 @@ import { useNonNullableContext } from "../hooks/useNonNullableContext";
 
 export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
-export const CLEAR_ITEMS = "CLEAR_ITEMS";
+const CLEAR_ITEMS = "CLEAR_ITEMS";
 export const OPEN_SAVED_ITEMS = "OPEN_SAVED_ITEMS";
 
 type SavedItem = {
