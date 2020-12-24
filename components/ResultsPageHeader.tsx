@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageHeader, Button, Descriptions } from 'antd';
-import { getInitialQuery, useSearchParams } from '../helpers/initial-query';
+import { getInitialQuery } from '../helpers/initial-query';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 type OwnProps = {

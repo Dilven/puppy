@@ -5,11 +5,12 @@ import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
 import { SERIES_TYPE } from '../../../constants/resource-types';
 import { getInitialQuery } from '../../../helpers/initial-query';
+import { validateSearchQuery } from '../../../helpers/validation';
 import { ExternalService } from '../../../services/external-api';
 import { InternalApi } from '../../../services/internal-api';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const searchParams = getInitialQuery(query)
+  const searchParams = validateSearchQuery(getInitialQuery(query))
   const initialData = await ExternalService.searchSeries(searchParams)
   return {
     props: { searchParams, initialData }

@@ -7,9 +7,10 @@ import { InternalApi } from '../../../services/internal-api';
 import { getInitialQuery } from '../../../helpers/initial-query';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { ExternalService } from '../../../services/external-api';
+import { validateSearchQuery } from '../../../helpers/validation';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const searchParams = getInitialQuery(query)
+  const searchParams = validateSearchQuery(getInitialQuery(query));
   const initialData = await ExternalService.searchMovies(searchParams)
   return {
     props: { searchParams, initialData }
