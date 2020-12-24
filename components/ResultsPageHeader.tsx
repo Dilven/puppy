@@ -9,7 +9,7 @@ type Props = {
 
 export const ResultsPageHeader = ({ title }: Props) => {
   const { query } = useRouter();
-  const { year, name } = getInitialQuery(query)
+  const { year, name } = getInitialQuery(query);
   return (
     <PageHeader
       ghost={false}
@@ -29,5 +29,5 @@ export const ResultsPageHeader = ({ title }: Props) => {
         {year && <Descriptions.Item label="Year">{year}</Descriptions.Item>}
       </Descriptions>
     </PageHeader>
-  )
-}
+  );
+};

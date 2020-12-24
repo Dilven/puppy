@@ -1,8 +1,10 @@
-import { Alert, Button, Form as AntdForm, Input} from "antd";
+import {
+  Alert, Button, Form as AntdForm, Input,
+} from 'antd';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from "react";
-import { Controller, FieldErrors, useForm } from "react-hook-form";
-import { signUpFormSchema, FormData } from "../../schemas/sign-up-form";
+import React from 'react';
+import { Controller, FieldErrors, useForm } from 'react-hook-form';
+import { signUpFormSchema, FormData } from '../../schemas/sign-up-form';
 import styles from './SignUpForm.module.css';
 
 const layout = {
@@ -10,7 +12,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-const getErrorsMessages = (errors: FieldErrors<FormData>) => Object.values(errors).map(error => error?.message).filter(message => message)
+const getErrorsMessages = (errors: FieldErrors<FormData>) => Object.values(errors).map((error) => error?.message).filter((message) => message);
 
 type Props = {
   signUp: (formData: FormData) => Promise<void>
@@ -18,11 +20,11 @@ type Props = {
 
 export const SignUpForm = ({ signUp }: Props) => {
   const { handleSubmit, control, errors } = useForm({
-    resolver: zodResolver(signUpFormSchema)
+    resolver: zodResolver(signUpFormSchema),
   });
   const errorsMessages = getErrorsMessages(errors);
 
-  const onSubmit = handleSubmit(signUp)
+  const onSubmit = handleSubmit(signUp);
 
   return (
     <AntdForm {...layout} onFinish={onSubmit} className={styles.form}>
@@ -49,7 +51,7 @@ export const SignUpForm = ({ signUp }: Props) => {
           Submit
         </Button>
       </div>
-      {errorsMessages.map(error => <Alert message={error} type="error" showIcon />)}
+      {errorsMessages.map((error) => <Alert message={error} type="error" showIcon />)}
     </AntdForm>
   );
 };

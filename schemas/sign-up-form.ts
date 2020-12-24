@@ -1,12 +1,12 @@
 import * as z from 'zod';
 
 const determinLength = (name: string, length: number) => ({
-  check: (val: string) => val.length >= length, 
+  check: (val: string) => val.length >= length,
   message: `${name} can't be less than ${length} characters`,
-})
+});
 
 const passwordRefine = determinLength('password', 6);
-const nameRefine= determinLength('name', 4);
+const nameRefine = determinLength('name', 4);
 
 export const signUpFormSchema = z
   .object({
@@ -14,9 +14,9 @@ export const signUpFormSchema = z
     password: z.string().refine(passwordRefine.check, passwordRefine.message),
     confirm: z.string(),
   })
-  .refine(data => data.password === data.confirm, {
+  .refine((data) => data.password === data.confirm, {
     message: "Passwords don't match",
     path: ['confirm'],
-  })
+  });
 
-export type FormData = z.infer<typeof signUpFormSchema>; 
+export type FormData = z.infer<typeof signUpFormSchema>;

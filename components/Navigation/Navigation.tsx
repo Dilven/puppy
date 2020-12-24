@@ -1,9 +1,13 @@
 import React from 'react';
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import {
+  Layout, Menu, Button, Badge,
+} from 'antd';
+import {
+  UploadOutlined, UserOutlined, VideoCameraOutlined, PlusSquareOutlined,
+} from '@ant-design/icons';
 import { paths } from '../../config/paths';
-import { Layout, Menu, Button, Badge } from 'antd';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import { OPEN_SAVED_ITEMS, useDispatchSaved, useSaved } from '../../providers/SavedProvider';
 import styles from './Navigation.module.css';
 import { useNotification } from '../../providers/NotificationProvider';
@@ -22,7 +26,7 @@ export const Navigation = () => {
       <Sider
         className={styles.sider}
       >
-      <div className="logo" />
+        <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
           <Menu.Item key={paths.signUp} icon={<UserOutlined />}>
             <Link href={paths.signUp}>Sign up</Link>
@@ -41,13 +45,13 @@ export const Navigation = () => {
           </Menu.Item>
         </Menu>
         <div className={styles.savedButtonWrapper}>
-          <Badge 
-            count={Object.keys(saved.items).length} 
+          <Badge
+            count={Object.keys(saved.items).length}
           >
-            <Button 
+            <Button
               block
               className={styles.savedButton}
-              type="dashed" 
+              type="dashed"
               icon={<PlusSquareOutlined />}
               onClick={() => dispatch({ type: OPEN_SAVED_ITEMS })}
             >
@@ -57,5 +61,5 @@ export const Navigation = () => {
         </div>
       </Sider>
     </Layout>
-  )
-}
+  );
+};

@@ -7,7 +7,7 @@ export const ItemSchema = z.object({
   Type: z.union([z.literal(MOVIE_TYPE), z.literal(SERIES_TYPE), z.literal(EPISODE_TYPE)]),
   Year: z.string(),
   imdbID: z.string(),
-})
+});
 
 export const ItemPreviewSchema = ItemSchema.extend({
   Actors: z.string(),
@@ -27,10 +27,10 @@ export const ItemPreviewSchema = ItemSchema.extend({
   Response: z.string(),
   Runtime: z.string(),
   Writer: z.string(),
-  imdbRating:  z.string(),
+  imdbRating: z.string(),
   imdbVotes: z.string(),
   Production: z.string(),
   BoxOffice: z.string(),
   Website: z.string(),
   DVD: z.string(),
-})
+});

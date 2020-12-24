@@ -1,16 +1,18 @@
 import * as z from 'zod';
 import axios, { AxiosTransformer } from 'axios';
-import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from '../helpers/validation';
+import {
+  PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch,
+} from '../helpers/validation';
 import { ResourceType } from '../models/item';
 import { ApiGetQuery, ApiSearchQuery } from '../models/api-search-params';
 import { EPISODE_TYPE, MOVIE_TYPE, SERIES_TYPE } from '../constants/resource-types';
 
-const RATE_LIMIT_HEADER = 'x-ratelimit-requests-remaining'
+const RATE_LIMIT_HEADER = 'x-ratelimit-requests-remaining';
 let limitExceeded = false;
 
-const setLimitExceeded = (remainingRequests?: number) => { limitExceeded = !remainingRequests || remainingRequests < 100 };
+const setLimitExceeded = (remainingRequests?: number) => { limitExceeded = !remainingRequests || remainingRequests < 100; };
 
-const SearchSchema = z.object({ Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string()});
+const SearchSchema = z.object({ Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string() });
 
 const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string> = {
   name: 's',
@@ -18,16 +20,16 @@ const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string> = {
   plot: 'plot',
   page: 'page',
   id: 'i',
-  type: 'type'
-}
+  type: 'type',
+};
 
 const apiRequest = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
   timeout: 2000,
   headers: {
-    "x-rapidapi-key": process.env.API_KEY,
-    "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
-    "useQueryString": true
+    'x-rapidapi-key': process.env.API_KEY,
+    'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
+    useQueryString: true,
   },
   transformResponse: ([] as any).concat(
     (data: any, headers: any) => {
@@ -35,32 +37,33 @@ const apiRequest = axios.create({
       return data;
     },
     axios.defaults.transformResponse,
-  )
+  ),
 });
 
-const getQueryParams = ({ name, year, plot, page }: ApiSearchQuery) => {
-  const params = new URLSearchParams()
-  if(name) params.set(paramsAliases.name, name);
-  if(year) params.set(paramsAliases.year, `${year}`);
-  if(plot) params.set(paramsAliases.plot, plot);
-  if(page) params.set(paramsAliases.page, `${page}`);
+const getQueryParams = ({
+  name, year, plot, page,
+}: ApiSearchQuery) => {
+  const params = new URLSearchParams();
+  if (name) params.set(paramsAliases.name, name);
+  if (year) params.set(paramsAliases.year, `${year}`);
+  if (plot) params.set(paramsAliases.plot, plot);
+  if (page) params.set(paramsAliases.page, `${page}`);
   return params.toString();
-}
-
+};
 
 const get = async <T extends ResourceType>(type: T, id: ApiGetQuery['id']): Promise<z.infer<PreviewSchemasType[T]>> => {
-  if(limitExceeded) throw new Error('xxx');
-  const { data } = await apiRequest.get<unknown>(`?${paramsAliases.id}=${id}&type=${type}&r=json`)
+  if (limitExceeded) throw new Error('xxx');
+  const { data } = await apiRequest.get<unknown>(`?${paramsAliases.id}=${id}&type=${type}&r=json`);
   return validatePreview(type, data);
-}
+};
 
 const search = async <T extends ResourceType>(type: T, params: ApiSearchQuery): Promise<z.infer<SearchSchemasType[T]>> => {
-  if(limitExceeded) throw new Error('xxx');
-  const queryParams = getQueryParams(params)
-  const { data } = await apiRequest.get<unknown>(`?${queryParams}&${paramsAliases.type}=${type}&r=json`)
+  if (limitExceeded) throw new Error('xxx');
+  const queryParams = getQueryParams(params);
+  const { data } = await apiRequest.get<unknown>(`?${queryParams}&${paramsAliases.type}=${type}&r=json`);
   const { Search } = SearchSchema.parse(data);
-  return validateSearch(type, Search)
-}
+  return validateSearch(type, Search);
+};
 
 const searchMovies = (params: ApiSearchQuery) => search(MOVIE_TYPE, params);
 const searchSeries = (params: ApiSearchQuery) => search(SERIES_TYPE, params);
@@ -76,5 +79,5 @@ export const ExternalService = {
   searchEpisodes,
   getSeries,
   getMovie,
-  getEpisode
-}
+  getEpisode,
+};

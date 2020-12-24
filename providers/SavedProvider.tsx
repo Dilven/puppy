@@ -1,11 +1,11 @@
-import React, { useReducer, createContext } from "react";
-import { ResourceType } from "../constants/resource-types";
-import { useNonNullableContext } from "../hooks/useNonNullableContext";
+import React, { useReducer, createContext } from 'react';
+import { ResourceType } from '../constants/resource-types';
+import { useNonNullableContext } from '../hooks/useNonNullableContext';
 
-export const ADD_ITEM = "ADD_ITEM";
-export const REMOVE_ITEM = "REMOVE_ITEM";
-const CLEAR_ITEMS = "CLEAR_ITEMS";
-export const OPEN_SAVED_ITEMS = "OPEN_SAVED_ITEMS";
+export const ADD_ITEM = 'ADD_ITEM';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+const CLEAR_ITEMS = 'CLEAR_ITEMS';
+export const OPEN_SAVED_ITEMS = 'OPEN_SAVED_ITEMS';
 
 type SavedItem = {
   id: string;
@@ -45,29 +45,29 @@ const SavedStateContext = createContext<State | undefined>(undefined);
 const SavedDispatchContext = createContext<React.Dispatch<SavedActions> | undefined>(undefined);
 
 const reducer = (state: State, action: SavedActions) => {
-  switch(action.type) {
+  switch (action.type) {
     case OPEN_SAVED_ITEMS: {
       return {
         ...state,
-        isOpen: !state.isOpen
-      }
+        isOpen: !state.isOpen,
+      };
     }
     case ADD_ITEM: {
-        return {
-          ...state,
-          items: {
-            ...state.items, 
-            [action.item.id]: action.item,
-          },
-        };
-      }
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [action.item.id]: action.item,
+        },
+      };
+    }
     case REMOVE_ITEM:
       return {
         ...state,
-        items: Object.entries(state.items).reduce((items, [id, item]) => id !== action.id ? {...items, [id]: item } : items, {})
+        items: Object.entries(state.items).reduce((items, [id, item]) => (id !== action.id ? { ...items, [id]: item } : items), {}),
       };
     case CLEAR_ITEMS:
-      return { ...state, items: {}};
+      return { ...state, items: {} };
     default:
       return state;
   }
@@ -90,5 +90,4 @@ export const SavedProvider = ({ children }: Props) => {
 };
 
 export const useSaved = () => useNonNullableContext(SavedStateContext);
-export const useDispatchSaved = () =>
-  useNonNullableContext(SavedDispatchContext);
+export const useDispatchSaved = () => useNonNullableContext(SavedDispatchContext);

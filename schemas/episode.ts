@@ -1,4 +1,4 @@
-import { ItemSchema, ItemPreviewSchema } from "./item"
+import { ItemSchema, ItemPreviewSchema } from './item';
 
 export const EpisodeSchema = ItemSchema.extend({});
 

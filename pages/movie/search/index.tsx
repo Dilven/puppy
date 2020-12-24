@@ -7,7 +7,7 @@ import { Form } from '../../../components/Form/Form';
 const SearchMovies = () => (
   <div>
     <h2>Search movies</h2>
-    <Form query={InternalApi.searchMovies} queryKey={MOVIE_TYPE} redirectPath={paths.searchMoviesResults}/>
+    <Form query={InternalApi.searchMovies} queryKey={MOVIE_TYPE} redirectPath={paths.searchMoviesResults} />
   </div>
 );
 

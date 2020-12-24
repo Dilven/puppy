@@ -1,5 +1,5 @@
-import { ItemSchema, ItemPreviewSchema } from "./item"
 import * as z from 'zod';
+import { ItemSchema, ItemPreviewSchema } from './item';
 
 export const SeriesSchema = ItemSchema.extend({});
 

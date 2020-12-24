@@ -1,11 +1,10 @@
+import axios from 'axios';
 import { Episode } from '../models/episode';
 import { Series } from '../models/series';
 import { Movie } from '../models/movie';
-import { ApiGetQuery } from '../models/api-search-params';
+import { ApiGetQuery, ApiSearchQuery } from '../models/api-search-params';
 import { getQueryParams } from '../helpers/search-params';
-import axios from 'axios';
 import { Item } from '../models/item';
-import { ApiSearchQuery } from '../models/api-search-params';
 
 type ResourceType = Item['Type'];
 
@@ -23,7 +22,7 @@ function search(type: 'series', params: ApiSearchQuery): Promise<Series[]>
 function search(type: 'movie', params: ApiSearchQuery): Promise<Movie[]>
 function search(type: 'episode', params: ApiSearchQuery): Promise<Episode[]>
 async function search(type: ResourceType, params: ApiSearchQuery) {
-  const queryParams = getQueryParams(params)
+  const queryParams = getQueryParams(params);
   const { data } = await axios.get<(Series | Movie | Episode)[]>(`${baseApiPathname}${type}?${queryParams}`);
   return data;
 }
@@ -36,8 +35,8 @@ const getSeries = (id: string) => get('series', id);
 const getMovie = (id: string) => get('movie', id);
 const getEpisode = (id: string) => get('episode', id);
 
-export type SearchQuery = typeof searchMovies | typeof searchSeries | typeof searchEpisodes; 
-export type GetQuery = typeof getMovie | typeof getSeries | typeof getEpisode; 
+export type SearchQuery = typeof searchMovies | typeof searchSeries | typeof searchEpisodes;
+export type GetQuery = typeof getMovie | typeof getSeries | typeof getEpisode;
 
 export const InternalApi = {
   searchMovies,
@@ -46,4 +45,4 @@ export const InternalApi = {
   getSeries,
   getMovie,
   getEpisode,
-}
+};

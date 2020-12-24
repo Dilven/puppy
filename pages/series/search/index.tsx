@@ -7,7 +7,7 @@ import { Form } from '../../../components/Form/Form';
 const SearchSeries = () => (
   <div>
     <h2>Search series</h2>
-    <Form query={InternalApi.searchSeries} queryKey={SERIES_TYPE} redirectPath={paths.searchSeriesResults}/>
+    <Form query={InternalApi.searchSeries} queryKey={SERIES_TYPE} redirectPath={paths.searchSeriesResults} />
   </div>
 );
 

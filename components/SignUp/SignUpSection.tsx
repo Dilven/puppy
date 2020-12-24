@@ -9,4 +9,4 @@ export const SignUpSection = ({ children }: Props) => (
   <article className={styles.signUpSection}>
     {children}
   </article>
-)
+);
