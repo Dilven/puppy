@@ -8,9 +8,9 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "depcruise": "depcruise --validate .dependency-cruiser.js pages",
+    "depcruise": "depcruise --validate .dependency-cruiser.json pages",
     "ts-unused": "ts-unused-exports tsconfig.json --showLineNumber --excludePathsFromReport=/pages/",
-    "lint": "eslint --color --ext .tsx,.ts,.js .",
+    "lint": "eslint --color --ext .tsx,.ts .",
     "lint:fix": "yarn lint --fix",
     "check": "yarn run type-check && yarn run depcruise && yarn run ts-unused && yarn run lint"
   },
