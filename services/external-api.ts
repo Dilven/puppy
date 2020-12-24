@@ -9,6 +9,8 @@ const RATE_LIMIT_HEADER = 'x-ratelimit-requests-remaining'
 let limitExceeded = false;
 const setLimitExceeded = (remainingRequests: number) => { limitExceeded = remainingRequests < 100 };
 
+const SearchSchema = z.object({ Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string()});
+
 export const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string> = {
   name: 's',
   year: 'y',
@@ -20,7 +22,7 @@ export const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string>
 
 const apiRequest = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
-  timeout: 1000,
+  timeout: 2000,
   headers: {
     "x-rapidapi-key": process.env.API_KEY,
     "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
@@ -54,8 +56,8 @@ const search = async <T extends ResourceType>(type: T, params: ApiSearchQuery): 
   if(limitExceeded) throw new Error('xxx');
   const queryParams = getQueryParams(params)
   const { data } = await apiRequest.get<unknown>(`?${queryParams}&${paramsAliases.type}=${type}&r=json`)
-  const results = z.object({ Search: z.array(z.unknown())}).parse(data).Search
-  return validateSearch(type, results)
+  const { Search } = SearchSchema.parse(data);
+  return validateSearch(type, Search)
 }
 
 const searchMovies = (params: ApiSearchQuery) => search(MOVIE_TYPE, params);
