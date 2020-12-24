@@ -1,13 +1,24 @@
 import React from 'react';
 import { PageHeader, Button, Descriptions } from 'antd';
-import { useSearchParams } from '../hooks/useSearchParams';
+import { getInitialQuery, useSearchParams } from '../helpers/initial-query';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-type Props = {
+type OwnProps = {
   title: string;
 }
 
-export const ResultsPageHeader = ({ title }: Props) => {
-  const { year, name } = useSearchParams();
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const searchParams = getInitialQuery(query)
+  return {
+    props: { searchParams }
+ }
+};
+
+type Props = InferGetServerSidePropsType<typeof getServerSideProps> & OwnProps
+
+
+export const ResultsPageHeader = ({ title, searchParams }: Props) => {
+  const { year, name } = searchParams
   return (
     <PageHeader
       ghost={false}

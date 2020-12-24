@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { validateGetQuery } from '../../../helpers/validation';
-import { ExternalService } from '../../../services/external-service';
+import { ExternalService } from '../../../services/external-api';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = validateGetQuery(req.query);
