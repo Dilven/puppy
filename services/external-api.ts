@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import axios, { AxiosTransformer } from 'axios';
+import axios from 'axios';
 import {
   PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch,
 } from '../helpers/validation';
@@ -10,9 +10,13 @@ import { EPISODE_TYPE, MOVIE_TYPE, SERIES_TYPE } from '../constants/resource-typ
 const RATE_LIMIT_HEADER = 'x-ratelimit-requests-remaining';
 let limitExceeded = false;
 
-const setLimitExceeded = (remainingRequests?: number) => { limitExceeded = !remainingRequests || remainingRequests < 100; };
+const setLimitExceeded = (remainingRequests?: number) => {
+  limitExceeded = !remainingRequests || remainingRequests < 100;
+};
 
-const SearchSchema = z.object({ Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string() });
+const SearchSchema = z.object({
+  Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string(),
+});
 
 const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string> = {
   name: 's',

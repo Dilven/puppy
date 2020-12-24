@@ -1,4 +1,4 @@
-import { apiQueryKeys } from '../helpers/api-query-keys';
+import { apiQueryKeys } from './api-query-keys';
 import { ApiSearchQuery } from '../models/api-search-params';
 
 export const getQueryParams = ({
