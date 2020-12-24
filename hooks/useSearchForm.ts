@@ -29,7 +29,7 @@ export const useSearchForm = (queryKey: ResourceType, query: SearchQuery, redire
 
   const onSubmit = handleSubmit(async (data: FormData) => {
     const year = data.year?.year();
-    const params: ApiSearchQuery = { ...data, year: year ? `${year}` : null }
+    const params: ApiSearchQuery = { ...data, year: year ? `${year}` : undefined }
     await mutate(rejectEmpty(params));
   })
 

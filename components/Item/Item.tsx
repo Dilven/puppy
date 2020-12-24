@@ -8,7 +8,6 @@ import styles from './Item.module.css';
 import { usePrefetchItem } from '../../hooks/usePrefetchQuery';
 import { ResourceType } from '../../models/item';
 import { useDispatchNotification } from '../../providers/NotificationProvider';
-import { undefined } from 'zod';
 
 const { Meta } = Card;
 

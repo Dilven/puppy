@@ -17,7 +17,7 @@ export const SavedItems = () => {
     >
     <Row>
       {Object.entries(saved.items).map(([,{ title, id, poster, type }]) => 
-        <Col span={8}>
+        <Col span={8} key={id}>
           <Item title={title} id={id} type={type} poster={poster} size='small' />
         </Col>
       )}

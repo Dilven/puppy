@@ -21,7 +21,7 @@ export const Results = ({ data, isLoading, isError }: Props) => {
   return (
     <Row className={styles.row}>
       {data?.map(d =>
-        <Col span={8}>
+        <Col span={8} key={d.imdbID}>
           <Item key={d.imdbID} title={d.Title} poster={d.Poster} type={d.Type} id={d.imdbID} />  
         </Col>
       )}

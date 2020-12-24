@@ -9,7 +9,7 @@ import { EpisodePreview } from '../../components/EpisodePreview';
 import { validateGetQuery } from '../../helpers/validation';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { id } = validateGetQuery({ id: params.id })
+  const { id } = validateGetQuery({ id: params?.id })
   const initialData = await ExternalService.getEpisode(id)
   return {
     props: { id, initialData }

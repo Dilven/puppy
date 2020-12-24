@@ -37,6 +37,7 @@ const getMovie = (id: string) => get('movie', id);
 const getEpisode = (id: string) => get('episode', id);
 
 export type SearchQuery = typeof searchMovies | typeof searchSeries | typeof searchEpisodes; 
+export type GetQuery = typeof getMovie | typeof getSeries | typeof getEpisode; 
 
 export const InternalApi = {
   searchMovies,

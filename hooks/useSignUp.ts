@@ -3,7 +3,7 @@ import { FormData } from "../schemas/sign-up-form";
 
 const fakeCreateUser = (formData: FormData) => {
   const isSuccess = formData.name === 'success';
-  return new Promise((resolve, reject) => setTimeout(() => isSuccess ? resolve() : reject(), 2000));
+  return new Promise((resolve, reject) => setTimeout(() => isSuccess ? resolve('success') : reject(), 2000));
 }
 
 type Status = 'wait' | 'process' | 'finish' | 'error' | undefined;

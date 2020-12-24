@@ -1,6 +1,6 @@
 import React, { useReducer, createContext } from "react";
+import { ResourceType } from "../constants/resource-types";
 import { useNonNullableContext } from "../hooks/useNonNullableContext";
-import { ResourceType } from "../../models/item";
 
 export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";

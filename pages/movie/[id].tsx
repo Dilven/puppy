@@ -9,7 +9,7 @@ import { ExternalService } from '../../services/external-api';
 import { validateGetQuery } from '../../helpers/validation';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { id } = validateGetQuery({ id: params.id })
+  const { id } = validateGetQuery({ id: params?.id })
   const initialData = await ExternalService.getMovie(id)
   return {
     props: { id, initialData }

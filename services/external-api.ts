@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import axios from 'axios';
+import axios, { AxiosTransformer } from 'axios';
 import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from '../helpers/validation';
 import { ResourceType } from '../models/item';
 import { ApiGetQuery, ApiSearchQuery } from '../models/api-search-params';
@@ -7,7 +7,8 @@ import { EPISODE_TYPE, MOVIE_TYPE, SERIES_TYPE } from '../constants/resource-typ
 
 const RATE_LIMIT_HEADER = 'x-ratelimit-requests-remaining'
 let limitExceeded = false;
-const setLimitExceeded = (remainingRequests: number) => { limitExceeded = remainingRequests < 100 };
+
+const setLimitExceeded = (remainingRequests?: number) => { limitExceeded = !remainingRequests || remainingRequests < 100 };
 
 const SearchSchema = z.object({ Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string()});
 
@@ -28,12 +29,13 @@ const apiRequest = axios.create({
     "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
     "useQueryString": true
   },
-  transformResponse: [].concat(
-    axios.defaults.transformResponse,
+  transformResponse: ([] as any).concat(
     (data: any, headers: any) => {
       setLimitExceeded(headers[RATE_LIMIT_HEADER]);
       return data;
-    }),
+    },
+    axios.defaults.transformResponse,
+  )
 });
 
 const getQueryParams = ({ name, year, plot, page }: ApiSearchQuery) => {

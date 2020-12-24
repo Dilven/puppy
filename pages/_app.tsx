@@ -9,13 +9,14 @@ import { SavedItems } from '../components/SavedItems';
 import { defaultOptions } from '../config/cache';
 import { Navigation } from '../components/Navigation/Navigation';
 import styles from '../styles/app.module.css'
+import type { AppProps } from 'next/app';
 
 
 const { Header, Content, Footer } = Layout;
 
 const queryCache = new QueryClient({ defaultOptions })
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={queryCache}>
       <ReactQueryDevtools initialIsOpen />
