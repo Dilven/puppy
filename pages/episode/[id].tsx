@@ -5,11 +5,11 @@ import { Spin } from 'antd';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { ExternalService } from '../../services/external-api';
 import { InternalApi } from '../../services/internal-api';
-import { getInitialParams } from '../../helpers/initial-params';
 import { EpisodePreview } from '../../components/EpisodePreview';
+import { validateGetQuery } from '../../helpers/validation';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const id = getInitialParams(params)
+  const { id } = validateGetQuery(params)
   const initialData = await ExternalService.getEpisode(id)
   return {
     props: { id, initialData }

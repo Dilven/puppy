@@ -5,11 +5,11 @@ import { Spin } from 'antd';
 import { MoviePreview } from '../../components/MoviePreview';
 import { InternalApi } from '../../services/internal-api';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getInitialParams } from '../../helpers/initial-params';
 import { ExternalService } from '../../services/external-api';
+import { validateGetQuery } from '../../helpers/validation';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const id = getInitialParams(params)
+  const { id } = validateGetQuery(params)
   const initialData = await ExternalService.getMovie(id)
   return {
     props: { id, initialData }
