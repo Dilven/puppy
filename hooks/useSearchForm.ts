@@ -23,7 +23,7 @@ export const useSearchForm = (queryKey: ResourceType, query: SearchQuery, redire
       const searchParams = {...variables, page: DEFAULT_PAGE }
       queryClient.setQueryData([queryKey, searchParams], data)
       const searchParamsUrl = getQueryParams(searchParams);
-      router.push(`${redirectPath}?${searchParamsUrl}`);
+      router.push(`${redirectPath}?${searchParamsUrl}`, undefined, { shallow: true });
     }
   });
 

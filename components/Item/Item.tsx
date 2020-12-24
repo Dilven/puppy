@@ -8,6 +8,7 @@ import styles from './Item.module.css';
 import { usePrefetchItem } from '../../hooks/usePrefetchQuery';
 import { ResourceType } from '../../models/item';
 import { useDispatchNotification } from '../../providers/NotificationProvider';
+import { undefined } from 'zod';
 
 const { Meta } = Card;
 
@@ -53,7 +54,7 @@ export const Item = ({ title, poster, id, type, size }: Props) => {
       className={styles.card}
       cover={
         <Image
-          onClick={() => router.push(`/${type}/${id}`)}
+          onClick={() => router.push(`/${type}/${id}`, undefined, { shallow: true })}
           alt="example"
           src={poster}
           className={styles.image}
