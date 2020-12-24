@@ -1,12 +1,12 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Error } from '../../client/components/Error';
-import { SeriesPreview } from '../../client/components/SeriePreview';
+import { Error } from '../../components/Error';
+import { SeriesPreview } from '../../components/SeriePreview';
 import { Spin } from 'antd';
-import { getSeries } from '../../client/helpers/api';
+import { InternalApi } from '../../services/internal-api';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getInitialParams } from '../../client/helpers/initial-params';
-import { ExternalService } from '../../shared/external-service'
+import { getInitialParams } from '../../helpers/initial-params';
+import { ExternalService } from '../../services/external-api'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = getInitialParams(params)
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const Series = ({ id, initialData }: Props) => {
-  const { data, isLoading, error } = useQuery(id, () => getSeries(id), {
+  const { data, isLoading, error } = useQuery(id, () => InternalApi.getSeries(id), {
     initialData,
     retry: false,
   })

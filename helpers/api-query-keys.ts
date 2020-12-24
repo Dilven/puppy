@@ -1,4 +1,4 @@
-import { ApiSearchQuery } from "./models/api-search-params";
+import { ApiSearchQuery } from "../models/api-search-params";
 
 export const apiQueryKeys: Record<keyof ApiSearchQuery, string> = {
   name: 'name',

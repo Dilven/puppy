@@ -1,10 +1,9 @@
 import { useHistory } from "react-router-dom";
-import { apiQueryKeys } from "../../shared/api-query-keys";
+import { apiQueryKeys } from "../helpers/api-query-keys";
 import { rejectEmpty } from "../helpers/reject-empty";
 
 export const useSearchParams = () => {
   const router = useRouter()
-  console.log('DEBUGGING:  ~ file: useSearchParams.ts ~ line 7 ~ useSearchParams ~ router', router.query);
   const searchParams = new URLSearchParams(history.location.search);
 
   const params = {

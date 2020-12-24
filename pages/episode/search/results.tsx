@@ -1,14 +1,14 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { Results } from '../../../client/components/Results/Results';
-import { ResultsPageHeader } from '../../../client/components/ResultsPageHeader';
-import { EPISODES_QUERY_KEY } from '../../../client/constants/queries-keys';
-import { searchEpisodes } from '../../../client/helpers/api';
-import { useSearchParams } from '../../../client/hooks/useSearchParams';
+import { Results } from '../../../components/Results/Results';
+import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
+import { EPISODES_QUERY_KEY } from '../../../constants/queries-keys';
+import { InternalApi } from '../../../services/internal-api';
+import { useSearchParams } from '../../../hooks/useSearchParams';
 
 const ResultsEpisodes = () => {
   const searchParams = useSearchParams()
-  const { data, isLoading, error } = useQuery([EPISODES_QUERY_KEY, searchParams], async () => await searchEpisodes(searchParams))
+  const { data, isLoading, error } = useQuery([EPISODES_QUERY_KEY, searchParams], async () => await InternalApi.searchEpisodes(searchParams))
 
   return (
     <>

@@ -5,7 +5,7 @@ import { QueryKey } from "../constants/queries-keys";
 import { DEFAULT_PAGE } from "../constants/search-params";
 import { rejectEmpty } from "../helpers/reject-empty";
 import { getQueryParams } from "../helpers/search-params";
-import { ApiSearchQuery } from "../../shared/models/api-search-params";
+import { ApiSearchQuery } from "../models/api-search-params";
 import { SearchQuery } from "../helpers/api";
 
 type FormData = {

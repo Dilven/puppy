@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Image, Row, Col } from 'antd';
-import { MoviePreview as MoviePreviewType } from '../../shared/models/movie';
+import { MoviePreview as MoviePreviewType } from '../models/movie';
 
 type Props = MoviePreviewType;
 

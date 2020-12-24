@@ -3,12 +3,12 @@ import 'antd/dist/antd.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Layout } from 'antd';
 import { ReactQueryDevtools } from 'react-query-devtools'
-import { SavedProvider } from '../client/providers/SavedProvider';
-import { NotificationProvider } from '../client/providers/NotificationProvider';
-import { SavedItems } from '../client/components/SavedItems';
-import { defaultOptions } from '../client/config/cache';
-import { Navigation } from '../client/components/Navigation/Navigation';
-import styles from '../client/styles/app.module.css'
+import { SavedProvider } from '../providers/SavedProvider';
+import { NotificationProvider } from '../providers/NotificationProvider';
+import { SavedItems } from '../components/SavedItems';
+import { defaultOptions } from '../config/cache';
+import { Navigation } from '../components/Navigation/Navigation';
+import styles from '../styles/app.module.css'
 
 
 const { Header, Content, Footer } = Layout;

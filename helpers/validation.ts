@@ -1,9 +1,9 @@
 import * as z from 'zod';
-import { EpisodeSchema, EpisodePreviewSchema } from "./schemas/episode";
-import { MovieSchema, MoviePreviewSchema } from "./schemas/movie";
-import { SeriesSchema, SeriesPreviewSchema } from "./schemas/series";
-import { ApiSearchQuerySchema, ApiGetQuerySchema } from "../shared/schemas/api-query";
-import { ResourceType } from "./models/item";
+import { EpisodeSchema, EpisodePreviewSchema } from "../schemas/episode";
+import { MovieSchema, MoviePreviewSchema } from "../schemas/movie";
+import { SeriesSchema, SeriesPreviewSchema } from "../schemas/series";
+import { ApiSearchQuerySchema, ApiGetQuerySchema } from "../schemas/api-query";
+import { ResourceType } from "../models/item";
 
 const SearchSchemas = {
   movie: z.array(MovieSchema),

@@ -1,5 +1,5 @@
-import { apiQueryKeys } from "../../shared/api-query-keys";
-import { ApiSearchQuery } from "../../shared/models/api-search-params";
+import { apiQueryKeys } from "../helpers/api-query-keys";
+import { ApiSearchQuery } from "../models/api-search-params";
 
 export const getQueryParams = ({ name, year, plot, page }: ApiSearchQuery) => {
   const params = new URLSearchParams()

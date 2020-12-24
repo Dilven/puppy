@@ -1,11 +1,11 @@
+import { InternalApi } from './../services/internal-api';
 import { useQueryClient } from "react-query";
-import { getEpisode, getMovie, getSeries } from "../helpers/api";
-import { ResourceType } from "../../shared/models/item";
+import { ResourceType } from "../models/item";
 
 const prefetchQueries = {
-  movie: getMovie,
-  series: getSeries,
-  episode: getEpisode
+  movie: InternalApi.getMovie,
+  series: InternalApi.getSeries,
+  episode: InternalApi.getEpisode
 }
 
 export const usePrefetchItem = (id: string, type: ResourceType) => {
