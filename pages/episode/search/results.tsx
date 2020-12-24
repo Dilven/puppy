@@ -20,7 +20,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const ResultsEpisodes = ({ searchParams, initialData }: Props) => {
-  const { data, isLoading, error } = useQuery([EPISODE_TYPE, searchParams], async () => await InternalApi.searchEpisodes(searchParams), { initialData });
+  const {
+    data,
+    isLoading,
+    error,
+  } = useQuery([EPISODE_TYPE, searchParams], () => InternalApi.searchEpisodes(searchParams), { initialData });
 
   return (
     <>

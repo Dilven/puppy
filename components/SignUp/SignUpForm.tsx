@@ -12,7 +12,10 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-const getErrorsMessages = (errors: FieldErrors<FormData>) => Object.values(errors).map((error) => error?.message).filter((message) => message);
+const getErrorsMessages = (errors: FieldErrors<FormData>) => {
+  const errorValues = Object.values(errors);
+  return errorValues.map((error) => error?.message).filter((message) => message);
+};
 
 type Props = {
   signUp: (formData: FormData) => Promise<void>

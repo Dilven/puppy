@@ -10,7 +10,6 @@ const prefetchQueries: Record<ResourceType, GetQuery> = {
 
 export const usePrefetchItem = (id: string, type: ResourceType) => {
   const queryClient = useQueryClient();
-  const x = prefetchQueries[type];
   const prefetchItem = () => queryClient.prefetchQuery(id, () => prefetchQueries[type](id));
   return prefetchItem;
 };

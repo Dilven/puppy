@@ -25,6 +25,7 @@ module.exports = {
     'no-redeclare': 0,
     'no-unused-vars': 0,
     'import/prefer-default-export': 0,
+    'import/no-unresolved': 0,
     '@typescript-eslint/no-redeclare': ['error'],
     '@typescript-eslint/no-unused-vars': ['error'],
     'react/jsx-filename-extension': [2, { extensions: ['.ts', '.tsx'] }],
@@ -32,6 +33,7 @@ module.exports = {
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-props-no-spreading': 0,
+    'react/require-default-props': 0,
   },
   settings: {
     'import/resolver': {
