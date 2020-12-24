@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { BadRequestError } from './expections';
 import { EpisodeSchema, EpisodePreviewSchema } from '../schemas/episode';
 import { MovieSchema, MoviePreviewSchema } from '../schemas/movie';
 import { SeriesSchema, SeriesPreviewSchema } from '../schemas/series';
@@ -26,5 +27,17 @@ const validate = <T extends Schemas>(schema: T, item: unknown): z.infer<T> => sc
 export const validateSearch = <T extends ResourceType>(type: T, item: unknown) => validate(SearchSchemas[type], item);
 export const validatePreview = <T extends ResourceType>(type: T, item: unknown) => validate(PreviewSchemas[type], item);
 
-export const validateSearchQuery = (query: unknown) => ApiSearchQuerySchema.parse(query);
-export const validateGetQuery = (query: unknown) => ApiGetQuerySchema.parse(query);
+export const validateSearchQuery = (query: unknown) => {
+  try {
+    return ApiSearchQuerySchema.parse(query);
+  } catch (e) {
+    throw new BadRequestError(e);
+  }
+};
+export const validateGetQuery = (query: unknown) => {
+  try {
+    return ApiGetQuerySchema.parse(query);
+  } catch (e) {
+    throw new BadRequestError(e);
+  }
+};

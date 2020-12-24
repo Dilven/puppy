@@ -1,5 +1,5 @@
-import { SERIES_TYPE, MOVIE_TYPE, EPISODE_TYPE } from './../constants/resource-types';
 import axios from 'axios';
+import { SERIES_TYPE, MOVIE_TYPE, EPISODE_TYPE } from '../constants/resource-types';
 import { Episode } from '../models/episode';
 import { Series } from '../models/series';
 import { Movie } from '../models/movie';

@@ -34,6 +34,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-props-no-spreading': 0,
     'react/require-default-props': 0,
+    'max-classes-per-file': 0,
   },
   settings: {
     'import/resolver': {

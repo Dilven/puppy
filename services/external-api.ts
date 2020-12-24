@@ -1,5 +1,7 @@
 import * as z from 'zod';
 import axios from 'axios';
+import { NotFoundError, UserReadableError } from '../helpers/expections';
+
 import {
   PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch,
 } from '../helpers/validation';
@@ -56,13 +58,14 @@ const getQueryParams = ({
 };
 
 const get = async <T extends ResourceType>(type: T, id: ApiGetQuery['id']): Promise<z.infer<PreviewSchemasType[T]>> => {
-  if (limitExceeded) throw new Error('xxx');
+  if (limitExceeded) throw new UserReadableError('XXX');
   const { data } = await apiRequest.get<unknown>(`?${paramsAliases.id}=${id}&type=${type}&r=json`);
+  if (!data) throw new NotFoundError();
   return validatePreview(type, data);
 };
 
 const search = async <T extends ResourceType>(type: T, params: ApiSearchQuery): Promise<z.infer<SearchSchemasType[T]>> => {
-  if (limitExceeded) throw new Error('xxx');
+  if (limitExceeded) throw new UserReadableError('XXX');
   const queryParams = getQueryParams(params);
   const { data } = await apiRequest.get<unknown>(`?${queryParams}&${paramsAliases.type}=${type}&r=json`);
   const { Search } = SearchSchema.parse(data);
