@@ -3,7 +3,7 @@ import React from 'react';
 import { useQuery } from 'react-query'
 import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
-import { EPISODES_QUERY_KEY } from '../../../constants/queries-keys';
+import { EPISODE_TYPE } from '../../../constants/resource-types';
 import { getInitialQuery } from '../../../helpers/initial-query';
 import { ExternalService } from '../../../services/external-api';
 import { InternalApi } from '../../../services/internal-api';
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const ResultsEpisodes = ({ searchParams, initialData }: Props) => {
-  const { data, isLoading, error } = useQuery([EPISODES_QUERY_KEY, searchParams], async () => await InternalApi.searchEpisodes(searchParams), { initialData })
+  const { data, isLoading, error } = useQuery([EPISODE_TYPE, searchParams], async () => await InternalApi.searchEpisodes(searchParams), { initialData })
 
   return (
     <>

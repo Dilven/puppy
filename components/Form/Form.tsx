@@ -1,6 +1,6 @@
 import React from "react"
-import { SearchQuery } from "../../helpers/api";
-import { QueryKey } from "../../constants/queries-keys";
+import { SearchQuery } from "../../services/internal-api";
+import { ResourceType } from "../../constants/resource-types";
 import { Button, DatePicker, Input, Form as AntdForm } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { Controller } from "react-hook-form";
@@ -9,7 +9,7 @@ import { useSearchForm } from "../../hooks/useSearchForm";
 
 type Props = {
   query: SearchQuery;
-  queryKey: QueryKey;
+  queryKey: ResourceType;
   redirectPath: string;
 }
 

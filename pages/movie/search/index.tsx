@@ -1,13 +1,13 @@
 import React from 'react';
 import { paths } from '../../../config/paths';
-import { MOVIES_QUERY_KEY } from '../../../constants/queries-keys';
+import { MOVIE_TYPE } from '../../../constants/resource-types';
 import { InternalApi } from '../../../services/internal-api';
 import { Form } from '../../../components/Form/Form';
 
 const SearchMovies = () => (
   <div>
     <h2>Search movies</h2>
-    <Form query={InternalApi.searchMovies} queryKey={MOVIES_QUERY_KEY} redirectPath={paths.searchMoviesResults}/>
+    <Form query={InternalApi.searchMovies} queryKey={MOVIE_TYPE} redirectPath={paths.searchMoviesResults}/>
   </div>
 );
 

@@ -1,19 +1,19 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router'
 import { useQueryClient, useMutation } from "react-query";
-import { QueryKey } from "../constants/queries-keys";
+import { ResourceType } from "../constants/resource-types";
 import { DEFAULT_PAGE } from "../constants/search-params";
 import { rejectEmpty } from "../helpers/reject-empty";
 import { getQueryParams } from "../helpers/search-params";
 import { ApiSearchQuery } from "../models/api-search-params";
-import { SearchQuery } from "../helpers/api";
+import { SearchQuery } from "../services/internal-api";
 
 type FormData = {
   year?: { year: () => string };
   name?: string;
 }
 
-export const useSearchForm = (queryKey: QueryKey, query: SearchQuery, redirectPath: string) => {
+export const useSearchForm = (queryKey: ResourceType, query: SearchQuery, redirectPath: string) => {
   const router = useRouter()
   const queryClient = useQueryClient();
   const { handleSubmit, control } = useForm();

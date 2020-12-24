@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query'
 import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
-import { MOVIES_QUERY_KEY } from '../../../constants/queries-keys';
+import { MOVIE_TYPE } from '../../../constants/resource-types';
 import { InternalApi } from '../../../services/internal-api';
 import { getInitialQuery } from '../../../helpers/initial-query';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const ResultsMovies = ({ searchParams, initialData }: Props) => {
-  const { data, isLoading, error } = useQuery([MOVIES_QUERY_KEY, searchParams], async () => await InternalApi.searchMovies(searchParams), { initialData })
+  const { data, isLoading, error } = useQuery([MOVIE_TYPE, searchParams], async () => await InternalApi.searchMovies(searchParams), { initialData })
 
   return (
     <>

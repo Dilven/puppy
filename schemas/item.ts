@@ -1,9 +1,10 @@
 import * as z from 'zod';
+import { MOVIE_TYPE, EPISODE_TYPE, SERIES_TYPE } from '../constants/resource-types';
 
 export const ItemSchema = z.object({
   Title: z.string(),
   Poster: z.string(),
-  Type: z.union([z.literal('movie'), z.literal('series'), z.literal('episode')]),
+  Type: z.union([z.literal(MOVIE_TYPE), z.literal(SERIES_TYPE), z.literal(EPISODE_TYPE)]),
   Year: z.string(),
   imdbID: z.string(),
 })
