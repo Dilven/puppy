@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Image, Row, Col } from 'antd';
-import { MoviePreview as MoviePreviewType } from '../models/movie';
+import { MoviePreview as MoviePreviewType } from '../../shared/models/movie';
 
 type Props = MoviePreviewType;
 
@@ -61,7 +61,7 @@ export const MoviePreview = (props: Props) => {
           <br />
           imdbVotes: {props.imdbVotes}
           <br />
-          {props.Ratings.map((rate) => <p>{rate.Source}, {rate.Value}</p>)}
+          {props.Ratings.map((rate) => <p key={rate.Source}>{rate.Source}, {rate.Value}</p>)}
           <br />
         </Col>
       </Row>

@@ -2,6 +2,7 @@ import * as z from 'zod';
 import { EpisodeSchema, EpisodePreviewSchema } from "./schemas/episode";
 import { MovieSchema, MoviePreviewSchema } from "./schemas/movie";
 import { SeriesSchema, SeriesPreviewSchema } from "./schemas/series";
+import { ApiSearchQuerySchema, ApiGetQuerySchema } from "../shared/schemas/api-query";
 import { ResourceType } from "./models/item";
 
 const SearchSchemas = {
@@ -24,3 +25,6 @@ type Schemas = PreviewSchemasType[keyof PreviewSchemasType] | SearchSchemasType[
 export const validate = <T extends Schemas>(schema: T, item: unknown): z.infer<T> => schema.parse(item);
 export const validateSearch = <T extends ResourceType>(type: T, item: unknown) => validate(SearchSchemas[type], item)
 export const validatePreview = <T extends ResourceType>(type: T, item: unknown) => validate(PreviewSchemas[type], item)
+
+export const validateSearchQuery = (query: unknown) => ApiSearchQuerySchema.parse(query);
+export const validateGetQuery = (query: unknown) => ApiGetQuerySchema.parse(query);

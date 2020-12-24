@@ -37,7 +37,6 @@ export const useSignUp = () => {
         changeStatus(undefined)
         changeStep('next')
       } catch(e) {
-        console.log('DEBUGGING: : useSignUp -> e', e);
         changeStatus('error');
       }
   }

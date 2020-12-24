@@ -6,11 +6,11 @@ import { Spin } from 'antd';
 import { EpisodePreview } from '../../client/components/EpisodePreview';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { getInitialParams } from '../../client/helpers/initial-params';
+import { ExternalService } from '../../shared/external-service';
 
-
-export const getServerSideProps: GetServerSideProps = async ({ params}) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = getInitialParams(params)
-  const initialData = await getEpisode(id);
+  const initialData = await ExternalService.getEpisode(id)
   return {
     props: { id, initialData }
  }

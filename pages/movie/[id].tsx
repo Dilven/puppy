@@ -6,10 +6,11 @@ import { MoviePreview } from '../../client/components/MoviePreview';
 import { getMovie } from '../../client/helpers/api';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { getInitialParams } from '../../client/helpers/initial-params';
+import { ExternalService } from '../../shared/external-service';
 
-export const getServerSideProps: GetServerSideProps = async ({ params}) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = getInitialParams(params)
-  const initialData = await getMovie(id);
+  const initialData = await ExternalService.getMovie(id)
   return {
     props: { id, initialData }
  }

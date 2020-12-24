@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import axios from 'axios';
-import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from '../shared/validation';
-import { ResourceType } from '../shared/models/item';
+import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from './validation';
+import { ResourceType } from './models/item';
 
 export type SearchParams = {
   name?: string | null;

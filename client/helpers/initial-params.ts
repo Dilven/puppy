@@ -1,4 +1,6 @@
-export const getInitialParams = ({ params }: Record<string, any>) => {
+import { ParsedUrlQuery } from "querystring";
+
+export const getInitialParams = (params: ParsedUrlQuery) => {
   const id = params.id;
   if (typeof id !== 'string') {
     throw new Error('path id must be a string')

@@ -1,7 +1,8 @@
+import { Episode } from './../../shared/models/episode';
+import { Series } from './../../shared/models/series';
+import { Movie } from './../../shared/models/movie';
 import { ApiGetQuery } from './../../shared/models/api-search-params';
-import * as z from 'zod';
 import { getQueryParams } from './search-params';
-import { PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch } from '../../shared/validation';
 import axios from 'axios';
 import { Item } from '../../shared/models/item';
 import { ApiSearchQuery } from '../../shared/models/api-search-params';
@@ -10,16 +11,21 @@ type ResourceType = Item['Type'];
 
 const baseApiPathname = '/api/';
 
-export const get = async <T extends ResourceType>(type: T, id: ApiGetQuery['id']): Promise<z.infer<PreviewSchemasType[T]>> => {
-  const { data } = await axios.get<unknown>(`${baseApiPathname}${type}/${id}`);
-  return validatePreview(type, data);
+export function get(type: 'series', params: ApiGetQuery['id']): Promise<Series>
+export function get(type: 'movie', params: ApiGetQuery['id']): Promise<Movie>
+export function get(type: 'episode', params: ApiGetQuery['id']): Promise<Episode>
+export async function get(type: ResourceType, id: ApiGetQuery['id']) {
+  const { data } = await axios.get<Series | Movie | Episode>(`${baseApiPathname}${type}/${id}`);
+  return data;
 }
 
-export const search = async <T extends ResourceType>(type: T, params: ApiSearchQuery): Promise<z.infer<SearchSchemasType[T]>> => {
+export function search(type: 'series', params: ApiSearchQuery): Promise<Series[]>
+export function search(type: 'movie', params: ApiSearchQuery): Promise<Movie[]>
+export function search(type: 'episode', params: ApiSearchQuery): Promise<Episode[]>
+export async function search(type: ResourceType, params: ApiSearchQuery) {
   const queryParams = getQueryParams(params)
-  const { data } = await axios.get<unknown>(`${baseApiPathname}${type}?${queryParams}`);
-  const results = z.object({ Search: z.array(z.unknown())}).parse(data).Search
-  return validateSearch(type, results)
+  const { data } = await axios.get<{ Search: (Series | Movie | Episode)[]}>(`${baseApiPathname}${type}?${queryParams}`);
+  return data.Search;
 }
 
 export const searchMovies = (params: ApiSearchQuery) => search('movie', params);
