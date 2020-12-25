@@ -1,6 +1,6 @@
 ## TODO
 
-add ranking, comments, users
+ssr hydration for better react-query behavior(prefetch etc) - check how worrks prefetch in NEXT, add ranking, comments, users
 
 ## DEMO
 https://puppy.dilven.vercel.app
