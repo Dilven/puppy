@@ -3,7 +3,7 @@ import {
   Card, Image, Row, Col,
 } from 'antd';
 import { MoviePreview as MoviePreviewType } from '../models/movie';
-import { Comments } from './Comments/Comment';
+import { Comments } from './Comments/Comments';
 
 const fakeComments = [
   { id: 1, author: 'Dilven', content: 'hahahahaha' },

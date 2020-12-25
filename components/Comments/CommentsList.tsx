@@ -1,5 +1,6 @@
 import React from 'react';
 import { Comment, Avatar } from 'antd';
+import { CommentEditor } from './CommentEditor';
 
 type CommentType = {
   id: number,
@@ -12,7 +13,7 @@ type Props = {
   data?: CommentType[]
 }
 
-export const Comments = ({ data = [] }: Props) => (
+export const CommentsList = ({ data = [] }: Props) => (
   <div>
     {data.map(({ replies, author, content }) => (
       <Comment
@@ -28,7 +29,7 @@ export const Comments = ({ data = [] }: Props) => (
         )}
         content={(<p>{content}</p>)}
       >
-        <Comments data={replies} />
+        <CommentsList data={replies} />
       </Comment>
     ))}
   </div>
