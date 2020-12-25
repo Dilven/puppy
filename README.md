@@ -1,6 +1,6 @@
 ## TODO
 
-ssr hydration for better react-query behavior(prefetch etc) - check how worrks prefetch in NEXT, add ranking, comments, users
+Add some static content(SSG), ssr hydration for better react-query behavior, check how worrks prefetch in NEXT, add ranking, comments, users
 
 ## DEMO
 https://puppy.dilven.vercel.app
