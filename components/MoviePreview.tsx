@@ -3,6 +3,20 @@ import {
   Card, Image, Row, Col,
 } from 'antd';
 import { MoviePreview as MoviePreviewType } from '../models/movie';
+import { Comments } from './Comments/Comment';
+
+const fakeComments = [
+  { id: 1, author: 'Dilven', content: 'hahahahaha' },
+  {
+    id: 2,
+    author: 'Dilven2',
+    content: 'xxxxx',
+    replies: [
+      { id: 3, author: 'Dilven3', content: 'eeeeee' }, { id: 4, author: 'Dilven4', content: '444444' },
+    ],
+  },
+  { id: 5, author: 'Dilven', content: '555555' },
+];
 
 type Props = MoviePreviewType;
 // eslint-disable-next-line max-len
@@ -121,6 +135,7 @@ export const MoviePreview = (props: Props) => {
           <br />
         </Col>
       </Row>
+      <Comments data={fakeComments} />
     </Card>
   );
 };
