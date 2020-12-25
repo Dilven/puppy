@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { BadRequestError } from './expections';
+import Boom from '@hapi/boom';
 import { EpisodeSchema, EpisodePreviewSchema } from '../schemas/episode';
 import { MovieSchema, MoviePreviewSchema } from '../schemas/movie';
 import { SeriesSchema, SeriesPreviewSchema } from '../schemas/series';
@@ -31,13 +31,13 @@ export const validateSearchQuery = (query: unknown) => {
   try {
     return ApiSearchQuerySchema.parse(query);
   } catch (e) {
-    throw new BadRequestError(e);
+    throw Boom.badRequest((e).message, e);
   }
 };
 export const validateGetQuery = (query: unknown) => {
   try {
     return ApiGetQuerySchema.parse(query);
   } catch (e) {
-    throw new BadRequestError(e);
+    throw Boom.badRequest((e).message, e);
   }
 };
