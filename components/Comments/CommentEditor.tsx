@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Button, Comment, Avatar, Input } from 'antd';
+import {
+  Form, Button, Comment, Avatar, Input,
+} from 'antd';
 
 const { TextArea } = Input;
 

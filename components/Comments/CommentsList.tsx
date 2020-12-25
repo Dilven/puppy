@@ -1,6 +1,5 @@
 import React from 'react';
 import { Comment, Avatar } from 'antd';
-import { CommentEditor } from './CommentEditor';
 
 type CommentType = {
   id: number,
