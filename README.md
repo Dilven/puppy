@@ -1,3 +1,7 @@
+## TODO
+
+add ranking, comments, users
+
 ## DEMO
 https://puppy.dilven.vercel.app
 
