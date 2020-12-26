@@ -33,6 +33,9 @@ export const Navigation = () => {
           <Menu.Item key={paths.signUp} icon={<UserOutlined />}>
             <Link href={paths.signUp}>Sign up</Link>
           </Menu.Item>
+          <Menu.Item key={paths.profile} icon={<UserOutlined />}>
+            <Link href={paths.profile}>My profile</Link>
+          </Menu.Item>
           <Menu.Item key={paths.home} icon={<UserOutlined />}>
             <Link href={paths.home}>Home</Link>
           </Menu.Item>

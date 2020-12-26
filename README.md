@@ -1,6 +1,6 @@
 ## TODO
 
-add logger, Add some static content(SSG), check how worrks prefetch in NEXT, add ranking, comments, users
+add logger, Add some static content(SSG), check how worrks prefetch in NEXT, add ranking, comments, users, profile users
 
 ## DEMO
 https://puppy.dilven.vercel.app
