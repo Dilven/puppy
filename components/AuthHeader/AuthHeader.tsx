@@ -1,11 +1,17 @@
 // TODO
 /* eslint-disable react/button-has-type */
-import React from 'react';
+import React, { useCallback } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/client';
 
 export const AuthHeader = () => {
   const [session] = useSession();
-
+  const signInMemo = useCallback(
+    () => {
+      console.log('xxxx');
+      signIn();
+    },
+    [],
+  );
   return (
     <>
       {!session && (
@@ -13,7 +19,7 @@ export const AuthHeader = () => {
         Not signed in
         {' '}
         <br />
-        <button onClick={() => signIn}>Sign in</button>
+        <button onClick={signInMemo}>Sign in</button>
       </>
       )}
       {session && (

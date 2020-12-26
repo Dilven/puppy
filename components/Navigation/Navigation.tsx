@@ -11,6 +11,7 @@ import { paths } from '../../config/paths';
 import { OPEN_SAVED_ITEMS, useDispatchSaved, useSaved } from '../../providers/SavedProvider';
 import styles from './Navigation.module.css';
 import { useNotification } from '../../providers/NotificationProvider';
+import { AuthHeader } from '../AuthHeader/AuthHeader';
 
 const { Sider } = Layout;
 
@@ -27,6 +28,7 @@ export const Navigation = () => {
         className={styles.sider}
       >
         <div className="logo" />
+        <AuthHeader />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
           <Menu.Item key={paths.signUp} icon={<UserOutlined />}>
             <Link href={paths.signUp}>Sign up</Link>
