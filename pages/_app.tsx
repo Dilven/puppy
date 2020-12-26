@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
 import { Layout } from 'antd';
-import { Provider as AuthProvider } from 'next-auth/client'
+import { Provider as AuthProvider } from 'next-auth/client';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import type { AppProps } from 'next/app';
 import { SavedProvider } from '../providers/SavedProvider';

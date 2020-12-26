@@ -7,6 +7,7 @@ export const AuthHeader = () => {
   const [session] = useSession();
   const signInMemo = useCallback(
     () => {
+      // eslint-disable-next-line no-console
       console.log('xxxx');
       signIn();
     },
