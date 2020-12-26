@@ -1,14 +1,14 @@
 import React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { Spin } from 'antd';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { dehydrate } from 'react-query/hydration';
 import { Error } from '../../components/Error';
 import { SeriesPreview } from '../../components/SeriePreview';
 import { InternalApi } from '../../services/internal-api';
 import { validateGetQuery } from '../../helpers/validation';
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }: GetServerSidePropsContext) => {
   const { id } = validateGetQuery({ id: params?.id });
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(id, () => InternalApi.getSeries(id));

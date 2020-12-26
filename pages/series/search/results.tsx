@@ -1,4 +1,4 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
@@ -9,7 +9,7 @@ import { getInitialQuery } from '../../../helpers/initial-query';
 import { validateSearchQuery } from '../../../helpers/validation';
 import { InternalApi } from '../../../services/internal-api';
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const queryClient = new QueryClient();
   const searchParams = validateSearchQuery(getInitialQuery(query));
   await queryClient.prefetchQuery([SERIES_TYPE, searchParams], async () => InternalApi.searchSeries(searchParams));

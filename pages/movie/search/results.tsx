@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
 import { MOVIE_TYPE } from '../../../constants/resource-types';
@@ -9,7 +9,7 @@ import { InternalApi } from '../../../services/internal-api';
 import { getInitialQuery } from '../../../helpers/initial-query';
 import { validateSearchQuery } from '../../../helpers/validation';
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const queryClient = new QueryClient();
   const searchParams = validateSearchQuery(getInitialQuery(query));
   await queryClient.prefetchQuery([MOVIE_TYPE, searchParams], () => InternalApi.searchMovies(searchParams));
