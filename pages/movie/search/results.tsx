@@ -1,30 +1,31 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
 import { MOVIE_TYPE } from '../../../constants/resource-types';
 import { InternalApi } from '../../../services/internal-api';
 import { getInitialQuery } from '../../../helpers/initial-query';
-import { ExternalService } from '../../../services/external-api';
 import { validateSearchQuery } from '../../../helpers/validation';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const queryClient = new QueryClient();
   const searchParams = validateSearchQuery(getInitialQuery(query));
-  const initialData = await ExternalService.searchMovies(searchParams);
+  await queryClient.prefetchQuery([MOVIE_TYPE, searchParams], () => InternalApi.searchMovies(searchParams));
   return {
-    props: { searchParams, initialData },
+    props: { searchParams, dehydratedState: dehydrate(queryClient) },
   };
 };
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const ResultsMovies = ({ searchParams, initialData }: Props) => {
+const ResultsMovies = ({ searchParams }: Props) => {
   const {
     data,
     isLoading,
     error,
-  } = useQuery([MOVIE_TYPE, searchParams], () => InternalApi.searchMovies(searchParams), { initialData });
+  } = useQuery([MOVIE_TYPE, searchParams], () => InternalApi.searchMovies(searchParams));
 
   return (
     <>

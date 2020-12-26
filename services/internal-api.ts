@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { SERIES_TYPE, MOVIE_TYPE, EPISODE_TYPE } from '../constants/resource-types';
-import { Episode } from '../models/episode';
-import { Series } from '../models/series';
-import { Movie } from '../models/movie';
+import { Episode, EpisodePreview } from '../models/episode';
+import { Series, SeriesPreview } from '../models/series';
+import { Movie, MoviePreview } from '../models/movie';
 import { ApiGetQuery, ApiSearchQuery } from '../models/api-search-params';
 import { getQueryParams } from '../helpers/search-params';
 import { Item } from '../models/item';
@@ -11,9 +11,9 @@ type ResourceType = Item['Type'];
 
 const baseApiPathname = '/api/';
 
-function get(type: typeof SERIES_TYPE, params: ApiGetQuery['id']): Promise<Series>
-function get(type: typeof MOVIE_TYPE, params: ApiGetQuery['id']): Promise<Movie>
-function get(type: typeof EPISODE_TYPE, params: ApiGetQuery['id']): Promise<Episode>
+function get(type: typeof SERIES_TYPE, params: ApiGetQuery['id']): Promise<SeriesPreview>
+function get(type: typeof MOVIE_TYPE, params: ApiGetQuery['id']): Promise<MoviePreview>
+function get(type: typeof EPISODE_TYPE, params: ApiGetQuery['id']): Promise<EpisodePreview>
 async function get(type: ResourceType, id: ApiGetQuery['id']) {
   const { data } = await axios.get<Series | Movie | Episode>(`${baseApiPathname}${type}/${id}`);
   return data;

@@ -1,30 +1,31 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import React from 'react';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
 import { SERIES_TYPE } from '../../../constants/resource-types';
 import { getInitialQuery } from '../../../helpers/initial-query';
 import { validateSearchQuery } from '../../../helpers/validation';
-import { ExternalService } from '../../../services/external-api';
 import { InternalApi } from '../../../services/internal-api';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const queryClient = new QueryClient();
   const searchParams = validateSearchQuery(getInitialQuery(query));
-  const initialData = await ExternalService.searchSeries(searchParams);
+  await queryClient.prefetchQuery([SERIES_TYPE, searchParams], async () => InternalApi.searchSeries(searchParams));
   return {
-    props: { searchParams, initialData },
+    props: { searchParams, dehydratedState: dehydrate(queryClient) },
   };
 };
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const ResultsSeries = ({ searchParams, initialData }: Props) => {
+const ResultsSeries = ({ searchParams }: Props) => {
   const {
     data,
     isLoading,
     error,
-  } = useQuery([SERIES_TYPE, searchParams], async () => InternalApi.searchSeries(searchParams), { initialData });
+  } = useQuery([SERIES_TYPE, searchParams], async () => InternalApi.searchSeries(searchParams));
 
   return (
     <>
