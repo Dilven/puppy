@@ -1,6 +1,6 @@
 ## TODO
 
-Fix infer types from getServerSideProps, Add some static content(SSG), check how worrks prefetch in NEXT, add ranking, comments, users
+Add some static content(SSG), check how worrks prefetch in NEXT, add ranking, comments, users
 
 ## DEMO
 https://puppy.dilven.vercel.app
