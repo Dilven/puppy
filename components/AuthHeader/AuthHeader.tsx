@@ -7,7 +7,7 @@ export const AuthHeader = () => {
   const [session] = useSession();
   const signInMemo = useCallback(() => signIn, []);
   const signOutMemo = useCallback(() => signOut, []);
-  
+
   return (
     <>
       {!session && (

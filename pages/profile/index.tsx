@@ -3,7 +3,7 @@ import { getSession, useSession } from 'next-auth/client';
 import React from 'react';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const ssrSession = await getSession(context)
+  const ssrSession = await getSession(context);
   if (!ssrSession) {
     return {
       redirect: {
@@ -15,7 +15,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: { ssrSession },
   };
-};
+}
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -28,7 +28,7 @@ const Profile = ({ ssrSession }: Props) => {
       <p>{session.user.email}</p>
       <p>{session.user.image}</p>
     </div>
-  )
+  );
 };
 
 export default Profile;
