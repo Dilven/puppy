@@ -1,0 +1,19 @@
+.authButton {
+  background-color: #372772;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 600px;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.title {
+}
