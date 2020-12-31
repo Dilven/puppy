@@ -5,32 +5,19 @@ import { signIn, signOut, useSession } from 'next-auth/client';
 
 export const AuthHeader = () => {
   const [session] = useSession();
-  const signInMemo = useCallback(
-    () => {
-      // eslint-disable-next-line no-console
-      console.log('xxxx');
-      signIn();
-    },
-    [],
-  );
+  const signInMemo = useCallback(() => signIn, []);
+  const signOutMemo = useCallback(() => signOut, []);
+  
   return (
     <>
       {!session && (
       <>
-        Not signed in
-        {' '}
-        <br />
         <button onClick={signInMemo}>Sign in</button>
       </>
       )}
       {session && (
       <>
-        Signed in as
-        {' '}
-        {session.user.email}
-        {' '}
-        <br />
-        <button onClick={() => signOut}>Sign out</button>
+        <button onClick={signOutMemo}>Sign out</button>
       </>
       )}
     </>
