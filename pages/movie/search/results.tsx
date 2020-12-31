@@ -6,13 +6,14 @@ import { Results } from '../../../components/Results/Results';
 import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
 import { MOVIE_TYPE } from '../../../constants/resource-types';
 import { InternalApi } from '../../../services/internal-api';
+import { ExternalService } from '../../../services/external-api';
 import { getInitialQuery } from '../../../helpers/initial-query';
 import { validateSearchQuery } from '../../../helpers/validation';
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const queryClient = new QueryClient();
   const searchParams = validateSearchQuery(getInitialQuery(query));
-  await queryClient.prefetchQuery([MOVIE_TYPE, searchParams], () => InternalApi.searchMovies(searchParams));
+  await queryClient.prefetchQuery([MOVIE_TYPE, searchParams], () => ExternalService.searchMovies(searchParams));
   return {
     props: { searchParams, dehydratedState: dehydrate(queryClient) },
   };

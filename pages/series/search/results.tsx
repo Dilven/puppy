@@ -7,12 +7,13 @@ import { ResultsPageHeader } from '../../../components/ResultsPageHeader';
 import { SERIES_TYPE } from '../../../constants/resource-types';
 import { getInitialQuery } from '../../../helpers/initial-query';
 import { validateSearchQuery } from '../../../helpers/validation';
+import { ExternalService } from '../../../services/external-api';
 import { InternalApi } from '../../../services/internal-api';
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const queryClient = new QueryClient();
   const searchParams = validateSearchQuery(getInitialQuery(query));
-  await queryClient.prefetchQuery([SERIES_TYPE, searchParams], async () => InternalApi.searchSeries(searchParams));
+  await queryClient.prefetchQuery([SERIES_TYPE, searchParams], async () => ExternalService.searchSeries(searchParams));
   return {
     props: { searchParams, dehydratedState: dehydrate(queryClient) },
   };

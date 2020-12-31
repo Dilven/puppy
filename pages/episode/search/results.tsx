@@ -8,11 +8,12 @@ import { EPISODE_TYPE } from '../../../constants/resource-types';
 import { getInitialQuery } from '../../../helpers/initial-query';
 import { validateSearchQuery } from '../../../helpers/validation';
 import { InternalApi } from '../../../services/internal-api';
+import { ExternalService } from '../../../services/external-api';
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const queryClient = new QueryClient();
   const searchParams = validateSearchQuery(getInitialQuery(query));
-  await queryClient.prefetchQuery([EPISODE_TYPE, searchParams], () => InternalApi.searchEpisodes(searchParams));
+  await queryClient.prefetchQuery([EPISODE_TYPE, searchParams], () => ExternalService.searchEpisodes(searchParams));
   return {
     props: { searchParams, dehydratedState: dehydrate(queryClient) },
   };
