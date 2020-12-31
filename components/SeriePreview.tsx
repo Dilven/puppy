@@ -27,12 +27,6 @@ export const SeriesPreview = (props: Props) => {
           <Image
             width={200}
             src={Poster}
-            placeholder={(
-              <Image
-                src={placeholderImage}
-                width={200}
-              />
-              )}
           />
           <p>
             Genre:
