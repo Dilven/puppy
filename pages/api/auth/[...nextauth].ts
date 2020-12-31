@@ -7,7 +7,7 @@ const getGithubSecrets = () => {
   const fakeClientId = 'fake';
   const fakeClientSecret = 'fake';
 
-  if (process.env.GITHUB_ID || process.env.GITHUB_SECRET) {
+  if (!process.env.GITHUB_ID || !process.env.GITHUB_SECRET) {
     logger.error('set secrets for github app');
   }
   return ({

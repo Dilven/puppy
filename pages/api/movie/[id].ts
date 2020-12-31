@@ -4,7 +4,7 @@ import { ExternalService } from '../../../services/external-api';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // TODO use params instead of query?
-  const { id } = validateGetQuery({ id: req.query });
+  const { id } = validateGetQuery({ id: req.query.id });
   const movie = await ExternalService.getMovie(id);
   res.status(200).json(JSON.stringify(movie));
 };

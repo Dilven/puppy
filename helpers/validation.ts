@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import Boom from '@hapi/boom';
+import { logger } from './logger';
 import { EpisodeSchema, EpisodePreviewSchema } from '../schemas/episode';
 import { MovieSchema, MoviePreviewSchema } from '../schemas/movie';
 import { SeriesSchema, SeriesPreviewSchema } from '../schemas/series';
@@ -31,6 +32,7 @@ export const validateSearchQuery = (query: unknown) => {
   try {
     return ApiSearchQuerySchema.parse(query);
   } catch (e) {
+    logger.info('Bad search request: ', query);
     throw Boom.badRequest((e).message, e);
   }
 };
@@ -38,6 +40,7 @@ export const validateGetQuery = (query: unknown) => {
   try {
     return ApiGetQuerySchema.parse(query);
   } catch (e) {
+    logger.info('Bad get request: ', query);
     throw Boom.badRequest((e).message, e);
   }
 };
