@@ -13,7 +13,6 @@ import { defaultOptions } from '../config/cache';
 import { Navigation } from '../components/Navigation/Navigation';
 import styles from '../styles/app.module.css';
 
-console.log('DEBUGGING:  ~ file: _app.tsx ~ line 13 ~ defaultOptions', defaultOptions);
 const { Header, Content, Footer } = Layout;
 
 const queryCache = new QueryClient({ defaultOptions });

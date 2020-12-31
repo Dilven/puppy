@@ -11,7 +11,6 @@ import { paths } from '../../config/paths';
 import { OPEN_SAVED_ITEMS, useDispatchSaved, useSaved } from '../../providers/SavedProvider';
 import styles from './Navigation.module.css';
 import { useNotification } from '../../providers/NotificationProvider';
-import { AuthHeader } from '../Auth/AuthHeader';
 
 const { Sider } = Layout;
 
