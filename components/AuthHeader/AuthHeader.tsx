@@ -5,8 +5,8 @@ import { signIn, signOut, useSession } from 'next-auth/client';
 
 export const AuthHeader = () => {
   const [session] = useSession();
-  const signInMemo = useCallback(() => signIn, []);
-  const signOutMemo = useCallback(() => signOut, []);
+  const signInMemo = useCallback(() => { console.log('xxx'); signIn(); }, []);
+  const signOutMemo = useCallback(() => signOut(), []);
 
   return (
     <>
