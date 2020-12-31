@@ -1,12 +1,17 @@
 import React from 'react';
+import { useSignUp } from '../../hooks/useSignUp';
+import { SignUpForm } from './SignUpForm';
 import styles from './SignUpSection.module.css';
+import { SingUpSteps } from './SignUpSteps';
 
-type Props = {
-  children: React.ReactNode;
-}
+export const SignUpSection = () => {
+  const { step, status, signUp } = useSignUp();
 
-export const SignUpSection = ({ children }: Props) => (
-  <article className={styles.signUpSection}>
-    {children}
-  </article>
-);
+  return (
+    <article className={styles.signUpSection}>
+      <h2>Sing Up</h2>
+      <SingUpSteps step={step} status={status} />
+      <SignUpForm signUp={signUp} />
+    </article>
+  );
+};

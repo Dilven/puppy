@@ -28,10 +28,9 @@ export const Navigation = () => {
         className={styles.sider}
       >
         <div className="logo" />
-        <AuthHeader />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
-          <Menu.Item key={paths.signUp} icon={<UserOutlined />}>
-            <Link href={paths.signUp}>Sign up</Link>
+          <Menu.Item key={paths.signIn} icon={<UserOutlined />}>
+            <Link href={paths.signIn}>Sign in</Link>
           </Menu.Item>
           <Menu.Item key={paths.profile} icon={<UserOutlined />}>
             <Link href={paths.profile}>My profile</Link>
