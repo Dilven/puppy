@@ -7,7 +7,7 @@ https://puppy.dilven.vercel.app
 
 ## Getting Started
 
-First, add API_KEY to .env.local and run the development server:
+First, add env variables to .env.local(you can look at .env.example) and run the development server:
 
 ```bash
 npm run dev
