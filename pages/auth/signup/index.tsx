@@ -4,7 +4,6 @@ import React from 'react';
 import { providers as requestProviders } from 'next-auth/client';
 import { InferGetStaticPropsType } from 'next';
 import { AuthProviders } from '../../../components/Auth/AuthProviders';
-import { paths } from '../../../config/paths';
 
 export async function getStaticProps() {
   return {
@@ -17,9 +16,7 @@ export async function getStaticProps() {
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 const SignUp = ({ providers }: Props) => (
-  <div>
-    <AuthProviders providers={providers} isSignUp />
-  </div>
+  <AuthProviders providers={providers} isSignUp />
 );
 
 export default SignUp;
