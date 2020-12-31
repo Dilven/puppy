@@ -5,14 +5,14 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { dehydrate } from 'react-query/hydration';
 import { Error } from '../../components/Error';
 import { InternalApi } from '../../services/internal-api';
-import { ExternalService } from '../../services/external-api';
+import { ExternalApi } from '../../services/external-api';
 import { EpisodePreview } from '../../components/EpisodePreview';
 import { validateGetQuery } from '../../helpers/validation';
 
 export const getServerSideProps = async ({ params }: GetServerSidePropsContext) => {
   const { id } = validateGetQuery({ id: params?.id });
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(id, () => ExternalService.getEpisode(id));
+  await queryClient.prefetchQuery(id, () => ExternalApi.getEpisode(id));
 
   return {
     props: { id, dehydratedState: dehydrate(queryClient) },

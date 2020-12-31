@@ -93,7 +93,7 @@ const getSeries = (id: string) => get(SERIES_TYPE, id);
 const getMovie = (id: string) => get(MOVIE_TYPE, id);
 const getEpisode = (id: string) => get(EPISODE_TYPE, id);
 
-export const ExternalService = {
+export const ExternalApi = {
   searchMovies,
   searchSeries,
   searchEpisodes,
