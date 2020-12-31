@@ -14,12 +14,15 @@ type Props = {
 
 export const CommentsList = ({ data = [] }: Props) => (
   <div>
-    {data.map(({ replies, author, content }) => (
+    {data.map(({
+      replies, author, content, id,
+    }) => (
       <Comment
         actions={[<span key="comment-nested-reply-to">Reply to</span>]}
         // TODO
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         author={<a>{author}</a>}
+        key={id}
         avatar={(
           <Avatar
             src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
@@ -28,7 +31,7 @@ export const CommentsList = ({ data = [] }: Props) => (
         )}
         content={(<p>{content}</p>)}
       >
-        <CommentsList data={replies} />
+        <CommentsList data={replies} key={id} />
       </Comment>
     ))}
   </div>
