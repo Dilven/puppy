@@ -14,6 +14,7 @@ const RATE_LIMIT_HEADER = 'x-ratelimit-requests-remaining';
 let limitExceeded = false;
 
 const setLimitExceeded = (remainingRequests?: number) => {
+  logger.info(`Remaining External API requests: ${remainingRequests}`)
   limitExceeded = !remainingRequests || remainingRequests < 100;
 };
 
@@ -45,10 +46,13 @@ const apiRequest = axios.create({
       try {
         dataObject = JSON.parse(data);
       } catch {
-        logger.error('Error during parsing API response');
+        logger.error('Error during parsing External API response');
         throw Boom.badGateway();
       }
-      if (dataObject.Response === 'False') throw Boom.badGateway();
+      if (dataObject.Response === 'False') {
+        logger.error('Error from External API: ', dataObject);
+        throw Boom.badGateway();
+      }
       return data;
     },
     axios.defaults.transformResponse,
