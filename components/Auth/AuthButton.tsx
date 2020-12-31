@@ -2,7 +2,7 @@
 // TODO
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-undef */
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { GithubOutlined, MailOutlined } from '@ant-design/icons';
 import { signIn } from 'next-auth/client';
 import styles from './AuthButton.module.css';
@@ -38,5 +38,5 @@ export const AuthButton = ({ id, name, isSignUp }: Props) => {
       <div className={styles.icon}>{renderIcon(id)}</div>
       <span className={styles.title}>{getTitle(name, isSignUp)}</span>
     </div>
-  )
+  );
 };
