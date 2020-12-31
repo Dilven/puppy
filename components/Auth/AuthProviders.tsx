@@ -14,15 +14,15 @@ type Props = {
 }
 
 const defaultProviders = {
-  Email: { name: 'email' },
+  Email: { name: 'email', id: undefined, callbackUrl: undefined },
 };
 
 export const AuthProviders = ({ providers, isSignUp }: Props) => (
   <List
     dataSource={Object.values({ ...providers, ...defaultProviders } || defaultProviders)}
-    renderItem={({ name }) => (
-      <List.Item>
-        <AuthButton name={name} isSignUp={isSignUp} />
+    renderItem={({ name, id }) => (
+      <List.Item key={id}>
+        <AuthButton name={name} id={id} isSignUp={isSignUp} />
       </List.Item>
     )}
   />
