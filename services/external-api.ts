@@ -1,8 +1,8 @@
-import { logger } from './../helpers/logger';
 import * as z from 'zod';
 import axios from 'axios';
 
 import Boom from '@hapi/boom';
+import { logger } from '../helpers/logger';
 import {
   PreviewSchemasType, SearchSchemasType, validatePreview, validateSearch,
 } from '../helpers/validation';
@@ -14,7 +14,7 @@ const RATE_LIMIT_HEADER = 'x-ratelimit-requests-remaining';
 let limitExceeded = false;
 
 const setLimitExceeded = (remainingRequests?: number) => {
-  logger.info(`Remaining External API requests: ${remainingRequests}`)
+  logger.info(`Remaining External API requests: ${remainingRequests}`);
   limitExceeded = !remainingRequests || remainingRequests < 100;
 };
 
