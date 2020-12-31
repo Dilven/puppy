@@ -15,7 +15,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   return {
     props: { ssrSession },
   };
-}
+};
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
