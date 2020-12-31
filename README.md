@@ -1,6 +1,6 @@
 ## TODO
 
-css variables, check how worrks prefetch in NEXT, add ranking, comments, users, profile users
+css variables, fix styles, check how worrks prefetch in NEXT, add ranking, comments, users, profile users
 
 ## DEMO
 https://puppy.dilven.vercel.app
