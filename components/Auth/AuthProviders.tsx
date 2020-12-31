@@ -3,12 +3,14 @@ import React from 'react';
 import { providers as requestProviders } from 'next-auth/client';
 import { List, Card } from 'antd';
 import { GithubOutlined, MailOutlined } from '@ant-design/icons';
+
 type PromiseResolve<T> = T extends PromiseLike<infer U> ? U : T;
 
 type Providers = PromiseResolve<ReturnType<typeof requestProviders>>;
 
 type Props = {
-  providers: Providers
+  providers: Providers,
+  isSignUp?: boolean;
 }
 
 const renderIcon = (name: string) => {
@@ -20,7 +22,13 @@ const renderIcon = (name: string) => {
   }
 };
 
-export const AuthProviders = ({ providers }: Props) => (
+const getTitle = (isSignUp: boolean, name: string) => {
+  let title = isSignUp ? 'Sign up' : 'Sign in';
+  title += ` with ${name}`;
+  return title;
+};
+
+export const AuthProviders = ({ providers, isSignUp }: Props) => (
   <>
     <List
       grid={{
@@ -35,7 +43,7 @@ export const AuthProviders = ({ providers }: Props) => (
       dataSource={Object.values(providers || {})}
       renderItem={({ name }) => (
         <List.Item>
-          <Card title={`Sign in with ${name}`}>{renderIcon(name)}</Card>
+          <Card title={getTitle(isSignUp, name)}>{renderIcon(name)}</Card>
         </List.Item>
       )}
     />

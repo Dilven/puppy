@@ -18,7 +18,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 const SignUp = ({ providers }: Props) => (
   <div>
-    <AuthProviders providers={providers} />
+    <AuthProviders providers={providers} isSignUp />
     <a href={paths.signUpEmail}>Register by email</a>
   </div>
 );
