@@ -1,3 +1,4 @@
+import { logger } from './../helpers/logger';
 import * as z from 'zod';
 import axios from 'axios';
 
@@ -44,6 +45,7 @@ const apiRequest = axios.create({
       try {
         dataObject = JSON.parse(data);
       } catch {
+        logger.error('Error during parsing API response');
         throw Boom.badGateway();
       }
       if (dataObject.Response === 'False') throw Boom.badGateway();
