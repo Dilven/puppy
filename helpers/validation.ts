@@ -32,7 +32,7 @@ export const validateSearchQuery = (query: unknown) => {
   try {
     return ApiSearchQuerySchema.parse(query);
   } catch (e) {
-    logger.info('Bad search request: ', query);
+    logger.info(`Bad search request: ${query}`);
     throw Boom.badRequest((e).message, e);
   }
 };
@@ -40,7 +40,7 @@ export const validateGetQuery = (query: unknown) => {
   try {
     return ApiGetQuerySchema.parse(query);
   } catch (e) {
-    logger.info('Bad get request: ', query);
+    logger.info(`Bad get request: ${query}`);
     throw Boom.badRequest((e).message, e);
   }
 };

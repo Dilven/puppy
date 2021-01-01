@@ -66,6 +66,7 @@ export const Item = ({
           onClick={() => router.push(`/${type}/${id}`, undefined, { shallow: true })}
           alt="example"
           src={poster}
+          preview={false}
           className={styles.image}
         />
       )}

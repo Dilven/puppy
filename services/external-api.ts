@@ -19,8 +19,10 @@ const setLimitExceeded = (remainingRequests?: number) => {
 };
 
 const SearchSchema = z.object({
-  Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string(),
+  Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string(), Error: z.string().optional(),
 });
+
+type SearchType = z.infer<typeof SearchSchema>
 
 const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string> = {
   name: 's',
@@ -30,6 +32,8 @@ const paramsAliases: Record<keyof ApiSearchQuery | 'id' | 'type', string> = {
   id: 'i',
   type: 'type',
 };
+
+const errorOccured = (data: SearchType) => data.Response === 'False' && !data.Error.includes('not found');
 
 const apiRequest = axios.create({
   baseURL: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
@@ -42,18 +46,18 @@ const apiRequest = axios.create({
   transformResponse: ([] as any).concat(
     (data: any, headers: any) => {
       setLimitExceeded(headers[RATE_LIMIT_HEADER]);
-      let dataObject: Record<string, any>;
+      let dataObject: SearchType;
       try {
         dataObject = JSON.parse(data);
       } catch {
         logger.error('Error during parsing External API response');
         throw Boom.badGateway();
       }
-      if (dataObject.Response === 'False') {
-        logger.error('Error from External API: ', dataObject);
+      if (errorOccured(dataObject)) {
+        logger.error(`Error from External API: ${data}`);
         throw Boom.badGateway();
       }
-      return data;
+      return { ...dataObject, Search: dataObject.Search || [], totalResults: dataObject.totalResults || '0' };
     },
     axios.defaults.transformResponse,
   ),

@@ -14,10 +14,9 @@ type Props = {
 }
 
 export const Results = ({ data, isLoading, isError }: Props) => {
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
+  if (isLoading) return <span>Loading...</span>;
   if (!data || isError) return <Error />;
+  if (!data.length) return <p>NO RESULTS</p>;
   return (
     <Row className={styles.row}>
       {data?.map((d) => (

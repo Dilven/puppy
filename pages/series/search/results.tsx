@@ -11,6 +11,7 @@ import { ExternalApi } from '../../../services/external-api';
 import { InternalApi } from '../../../services/internal-api';
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+  console.log('dzieje sie');
   const queryClient = new QueryClient();
   const searchParams = validateSearchQuery(getInitialQuery(query));
   await queryClient.prefetchQuery([SERIES_TYPE, searchParams], async () => ExternalApi.searchSeries(searchParams));
