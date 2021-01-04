@@ -19,7 +19,10 @@ const setLimitExceeded = (remainingRequests?: number) => {
 };
 
 const SearchSchema = z.object({
-  Search: z.array(z.unknown()), totalResults: z.string(), Response: z.string(), Error: z.string().optional(),
+  Search: z.array(z.unknown()).optional(),
+  totalResults: z.string().optional(),
+  Response: z.string().optional(),
+  Error: z.string().optional(),
 });
 
 type SearchType = z.infer<typeof SearchSchema>
@@ -57,7 +60,7 @@ const apiRequest = axios.create({
         logger.error(`Error from External API: ${data}`);
         throw Boom.badGateway();
       }
-      return { ...dataObject, Search: dataObject.Search || [], totalResults: dataObject.totalResults || '0' };
+      return dataObject;
     },
     axios.defaults.transformResponse,
   ),
@@ -86,7 +89,7 @@ const search = async <T extends ResourceType>(type: T, params: ApiSearchQuery): 
   const queryParams = getQueryParams(params);
   const { data } = await apiRequest.get<unknown>(`?${queryParams}&${paramsAliases.type}=${type}&r=json`);
   const { Search } = SearchSchema.parse(data);
-  return validateSearch(type, Search);
+  return validateSearch(type, Search || []);
 };
 
 const searchMovies = (params: ApiSearchQuery) => search(MOVIE_TYPE, params);
