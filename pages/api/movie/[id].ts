@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { methodHandler } from '../../../helpers/methodHandler';
+import { methodHandler } from '../../../helpers/method-handler';
 import { validateGetQuery } from '../../../helpers/validation';
 import { ExternalApi } from '../../../services/external-api';
 
