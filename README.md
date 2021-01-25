@@ -1,9 +1,11 @@
+WIP
+
 ## TODO
 
 translate response from external API, fix custom auth pages, css variables, fix styles, check how worrks prefetch in NEXT, add ranking, comments, users, profile users
 
 ## DEMO
-https://puppy.dilven.vercel.app
+---
 
 ## Getting Started
 
